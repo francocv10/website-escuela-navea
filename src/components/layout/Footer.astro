@@ -32,8 +32,7 @@ const columns = [
 ---
 
 <footer class="border-t border-edge bg-ink">
-  <!-- pb amplio para que el botón flotante de WhatsApp no tape el contenido -->
-  <div class="mx-auto flex max-w-[1240px] flex-wrap justify-between gap-8 px-6 pt-12 pb-[100px]">
+  <div class="mx-auto flex max-w-[1240px] flex-wrap justify-between gap-x-8 gap-y-10 px-6 pt-14 pb-12">
     <div class="flex max-w-[320px] flex-col gap-3.5">
       <div class="flex items-center gap-3">
         <Image src={logo} alt="" width={48} height={48} class="block size-12 rounded-full" />
@@ -57,7 +56,8 @@ const columns = [
       }
     </div>
   </div>
-  <div class="mx-auto max-w-[1240px] px-6 pb-8 text-[13px] text-[#6b6b6b]">
-    © {new Date().getFullYear()} {site.name}
+  <!-- pb amplio para que el botón flotante de WhatsApp no tape el contenido -->
+  <div class="mx-auto max-w-[1240px] px-6 pb-[100px]">
+    <p class="m-0 border-t border-edge pt-6 text-[13px] text-muted">© {new Date().getFullYear()} {site.name}</p>
   </div>
 </footer>

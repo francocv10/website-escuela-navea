@@ -1,5 +1,4 @@
 ---
-import Card from '../ui/Card.astro';
 import SectionHeading from '../ui/SectionHeading.astro';
 
 const benefits = [
@@ -13,20 +12,15 @@ const benefits = [
 
 <section id="nosotros" class="bg-ink">
   <div class="mx-auto flex max-w-[1240px] flex-col gap-12 px-6 py-24">
-    <SectionHeading eyebrow="Por qué NAVEA" title="Aprendes tranquilo, llegas preparado" />
-    <ul class="m-0 grid list-none grid-cols-[repeat(auto-fit,minmax(min(100%,320px),1fr))] gap-5 p-0">
+    <SectionHeading title="Aprendes tranquilo, llegas preparado" />
+    <ul class="m-0 grid list-none gap-x-8 gap-y-10 p-0 sm:grid-cols-2 lg:grid-cols-5">
       {
-        benefits.map((b, i) => (
-          <Card as="li" class="gap-4">
-            <div
-              class="flex size-12 items-center justify-center rounded-full border-2 border-brand font-display text-[15px] font-extrabold text-brand"
-              aria-hidden="true"
-            >
-              {String(i + 1).padStart(2, '0')}
-            </div>
-            <h3 class="m-0 font-display text-xl font-extrabold">{b.title}</h3>
+        benefits.map((b) => (
+          <li class="relative flex flex-col gap-2.5 border-t border-edge-2 pt-6">
+            <span class="absolute -top-px left-0 block h-1 w-7 bg-brand" aria-hidden="true" />
+            <h3 class="m-0 font-display text-xl leading-tight font-extrabold text-balance">{b.title}</h3>
             <p class="m-0 text-[15px] text-pretty text-muted">{b.desc}</p>
-          </Card>
+          </li>
         ))
       }
     </ul>

@@ -9,12 +9,12 @@ const stats = [
 ---
 
 <section class="bg-surface" aria-label="NAVEA en cifras">
-  <dl class="mx-auto m-0 grid max-w-[1240px] grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-8 px-6 py-12">
+  <dl class="mx-auto m-0 grid max-w-[1240px] grid-cols-2 gap-x-6 gap-y-8 px-6 py-12 md:grid-cols-4">
     {
       stats.map((stat) => (
-        <div class="flex flex-col-reverse gap-1 border-l-[3px] border-brand pl-5">
-          <dt class="text-[15px] text-muted">{stat.label}</dt>
-          <dd class="m-0 font-display text-[44px] leading-none font-black">{stat.value}</dd>
+        <div class="flex flex-col-reverse gap-2 border-l border-edge-2 pl-5">
+          <dt class="text-[15px] leading-snug text-muted">{stat.label}</dt>
+          <dd class="m-0 font-display text-[clamp(34px,4vw,44px)] leading-none font-black tabular-nums">{stat.value}</dd>
         </div>
       ))
     }

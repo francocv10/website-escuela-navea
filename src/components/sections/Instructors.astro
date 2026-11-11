@@ -13,14 +13,14 @@ const instructors = [
 
 <section class="bg-white text-ink">
   <div class="mx-auto flex max-w-[1240px] flex-col gap-10 px-6 py-24">
-    <SectionHeading eyebrow="Instructores" title="Quienes te acompañan" eyebrowTone="ink" />
+    <SectionHeading title="Quienes te acompañan" />
     <ul class="m-0 grid list-none grid-cols-[repeat(auto-fit,minmax(min(100%,240px),1fr))] gap-5 p-0">
       {
         instructors.map((person) => (
           <li class="flex flex-col gap-3.5">
             <PhotoPlaceholder label="foto instructor" tone="light" class="aspect-square" />
             <div class="flex flex-col gap-0.5">
-              <p class="m-0 font-display text-[19px] font-extrabold">{person.name}</p>
+              <p class="m-0 font-display text-xl font-extrabold">{person.name}</p>
               <p class="m-0 text-[15px]">{person.role}</p>
             </div>
           </li>

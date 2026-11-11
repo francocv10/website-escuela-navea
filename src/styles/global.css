@@ -25,6 +25,18 @@
   html {
     scroll-behavior: smooth;
     scroll-padding-top: 88px;
+    scrollbar-color: var(--color-edge-2) var(--color-ink);
+    accent-color: var(--color-brand);
+  }
+
+  ::selection {
+    background: var(--color-brand);
+    color: var(--color-ink);
+  }
+
+  input,
+  textarea {
+    caret-color: var(--color-brand);
   }
 
   body {

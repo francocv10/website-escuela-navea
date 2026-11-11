@@ -14,9 +14,13 @@ const photos = [
 
 <section class="bg-ink">
   <div class="mx-auto flex max-w-[1240px] flex-col gap-10 px-6 py-24">
-    <SectionHeading eyebrow="Flota e instalaciones" title="Autos nuevos, sala equipada" />
-    <div class="grid auto-rows-[240px] grid-cols-[repeat(auto-fit,minmax(min(100%,280px),1fr))] gap-4">
-      {photos.map((label, i) => <PhotoPlaceholder label={label} class={i === 0 ? 'row-span-2' : undefined} />)}
+    <SectionHeading title="Autos nuevos, sala equipada" />
+    <div class="grid auto-rows-[220px] gap-4 sm:grid-cols-2 lg:auto-rows-[240px] lg:grid-cols-4">
+      {
+        photos.map((label, i) => (
+          <PhotoPlaceholder label={label} class={i === 0 ? 'row-span-2 sm:col-span-2 lg:row-span-2' : undefined} />
+        ))
+      }
     </div>
   </div>
 </section>

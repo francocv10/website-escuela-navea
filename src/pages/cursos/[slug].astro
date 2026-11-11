@@ -20,7 +20,15 @@ const { Content } = await render(course);
 <BaseLayout title={`Curso ${data.name}`} description={`${data.name}: ${data.description} Duración ${data.duration}, desde ${formatCLP(data.price)}.`}>
   <section class="bg-ink">
     <div class="mx-auto flex max-w-[1240px] flex-col gap-6 px-6 pt-16 pb-20">
-      <a href="/#cursos" class="self-start text-sm font-semibold text-muted transition-colors hover:text-brand">← Todos los cursos</a>
+      <a
+        href="/#cursos"
+        class="inline-flex items-center gap-2 self-start text-sm font-semibold text-muted transition-colors hover:text-brand"
+      >
+        <svg viewBox="0 0 16 16" class="size-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M13 8H3M7 4L3 8l4 4" />
+        </svg>
+        Todos los cursos
+      </a>
       <div class="flex items-center gap-4">
         <div class="flex size-16 items-center justify-center rounded-2xl bg-brand font-display text-2xl font-black text-ink">
           {data.code}

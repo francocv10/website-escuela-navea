@@ -17,7 +17,7 @@ const courses = (await getCollection('courses')).sort((a, b) => a.data.order - b
 <section id="cursos" class="bg-paper text-ink">
   <div class="mx-auto flex max-w-[1240px] flex-col gap-12 px-6 py-24">
     <div class="flex flex-wrap items-end justify-between gap-6">
-      <SectionHeading eyebrow="Cursos y licencias" title="Elige la licencia que necesitas" eyebrowTone="muted" />
+      <SectionHeading title="Elige la licencia que necesitas" />
       <p class="m-0 max-w-[380px] text-pretty text-[#555]">
         Todos los cursos incluyen clases teóricas, prácticas y preparación para el examen municipal.
       </p>
@@ -45,7 +45,7 @@ const courses = (await getCollection('courses')).sort((a, b) => a.data.order - b
               {showPrices && (
                 <div class="flex items-baseline justify-between">
                   <dt class="text-[#6b6b6b]">Desde</dt>
-                  <dd class="m-0 font-display text-[22px] font-black">{formatCLP(data.price)}</dd>
+                  <dd class="m-0 font-display text-[22px] font-black tabular-nums">{formatCLP(data.price)}</dd>
                 </div>
               )}
             </dl>

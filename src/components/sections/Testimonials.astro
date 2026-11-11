@@ -10,7 +10,7 @@ const testimonials = await getCollection('testimonials');
 <section class="bg-ink">
   <div class="mx-auto flex max-w-[1240px] flex-col gap-10 px-6 py-24">
     <div class="flex flex-wrap items-end justify-between gap-5">
-      <SectionHeading eyebrow="Testimonios" title="Lo que dicen nuestros alumnos" />
+      <SectionHeading title="Lo que dicen nuestros alumnos" />
       <a
         href={site.googleReviewsUrl}
         class="border-b-2 border-brand pb-0.5 text-[15px] font-bold text-brand transition-colors hover:text-brand-dark"
@@ -23,8 +23,12 @@ const testimonials = await getCollection('testimonials');
       {
         testimonials.map(({ data }) => (
           <Card as="li" class="gap-[18px]">
-            <div class="text-lg tracking-[4px] text-brand" role="img" aria-label="5 de 5 estrellas">
-              ★★★★★
+            <div class="flex gap-1 text-brand" role="img" aria-label="5 de 5 estrellas">
+              {Array.from({ length: 5 }, () => (
+                <svg viewBox="0 0 20 20" class="size-[18px]" fill="currentColor" aria-hidden="true">
+                  <path d="M10 1.5l2.6 5.3 5.9.9-4.25 4.1 1 5.85L10 14.9l-5.25 2.75 1-5.85L1.5 7.7l5.9-.9z" />
+                </svg>
+              ))}
             </div>
             <blockquote class="m-0 text-[17px] leading-[1.55] text-pretty">“{data.text}”</blockquote>
             <div class="mt-auto flex items-center gap-3">
