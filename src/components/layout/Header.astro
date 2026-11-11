@@ -5,6 +5,7 @@ import Button from '../ui/Button.astro';
 
 const links = [
   { href: '/#cursos', label: 'Cursos' },
+  { href: '/#servicios', label: 'Servicios' },
   { href: '/#nosotros', label: 'Nosotros' },
   { href: '/#contacto', label: 'Contacto' },
 ];
@@ -77,6 +78,6 @@ const links = [
     toggle.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
   };
 
-  toggle?.addEventListener('click', () => setOpen(menu?.hidden ?? false));
+  toggle?.addEventListener('click', () => setOpen(Boolean(menu?.hidden)));
   menu?.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
 </script>

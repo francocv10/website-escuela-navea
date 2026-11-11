@@ -1,0 +1,5 @@
+[
+  { "id": "practicas-6", "name": "Clases prácticas adicionales", "kind": "Práctica", "sessions": 6, "price": 65000, "order": 1 },
+  { "id": "practicas-12", "name": "Clases prácticas adicionales", "kind": "Práctica", "sessions": 12, "price": 120000, "order": 2 },
+  { "id": "teoricas-12", "name": "Clases teóricas adicionales", "kind": "Teórica", "sessions": 12, "price": 130000, "order": 3 }
+]
