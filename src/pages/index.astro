@@ -8,6 +8,7 @@ import Fleet from '../components/sections/Fleet.astro';
 import Hero from '../components/sections/Hero.astro';
 import HowItWorks from '../components/sections/HowItWorks.astro';
 import Instructors from '../components/sections/Instructors.astro';
+import OtherServices from '../components/sections/OtherServices.astro';
 import Stats from '../components/sections/Stats.astro';
 import Testimonials from '../components/sections/Testimonials.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
@@ -22,6 +23,7 @@ const showStripes = true;
   {showStripes && <div class="stripes h-3.5" aria-hidden="true" />}
   <Stats />
   <Courses showPrices={showPrices} />
+  <OtherServices showPrices={showPrices} />
   <Benefits />
   <HowItWorks />
   <Fleet />

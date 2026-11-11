@@ -38,4 +38,17 @@ const testimonials = defineCollection({
   }),
 });
 
-export const collections = { courses, faq, testimonials };
+// Servicios fuera de los cursos de licencia (clases adicionales, refuerzos, etc.).
+const services = defineCollection({
+  loader: file('src/content/services.json'),
+  schema: z.object({
+    id: z.string(),
+    name: z.string(),
+    kind: z.enum(['Práctica', 'Teórica']),
+    sessions: z.number().int().positive(),
+    price: z.number().int().positive(),
+    order: z.number().int(),
+  }),
+});
+
+export const collections = { courses, faq, testimonials, services };
