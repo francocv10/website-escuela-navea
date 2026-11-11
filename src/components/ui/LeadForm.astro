@@ -24,7 +24,7 @@ const accessKey = import.meta.env.PUBLIC_WEB3FORMS_KEY;
 
 const labelClass = 'flex flex-col gap-2 text-sm font-semibold text-soft';
 const fieldClass =
-  'h-[54px] rounded-xl border border-[#333] bg-surface px-4 text-base text-white outline-none placeholder:text-muted focus:border-brand';
+  'h-[54px] rounded-xl border border-[#333] bg-surface px-4 text-base text-white outline-none transition-colors placeholder:text-muted hover:border-[#4a4a4a] focus:border-brand';
 ---
 
 <form action="https://api.web3forms.com/submit" method="POST" class="flex flex-col gap-4" data-lead-form>
@@ -95,9 +95,14 @@ const fieldClass =
 
   <button
     type="submit"
-    class="mt-2 h-[58px] cursor-pointer rounded-xl bg-brand font-display text-[17px] font-extrabold text-ink transition-colors hover:bg-brand-dark"
+    data-submit
+    class="group relative mt-2 h-[58px] cursor-pointer overflow-hidden rounded-xl bg-brand font-display text-[17px] font-extrabold text-ink transition-[background-color,scale] hover:bg-brand-dark active:scale-[0.985] active:duration-100 aria-busy:cursor-progress aria-busy:bg-brand-dark"
   >
-    {submitLabel}
+    <span data-submit-label aria-live="polite">{submitLabel}</span>
+    <!-- Mientras se envía, la carretera avanza bajo el rótulo. -->
+    <span
+      class="road-dashes-ink absolute inset-x-0 bottom-0 h-1 opacity-0 transition-opacity group-aria-busy:animate-road group-aria-busy:opacity-100 motion-reduce:group-aria-busy:animate-none"
+      aria-hidden="true"></span>
   </button>
 </form>
 
@@ -105,5 +110,34 @@ const fieldClass =
   // Web3Forms necesita una URL absoluta para redirigir.
   document.querySelectorAll<HTMLInputElement>('[data-lead-form] [data-redirect]').forEach((input) => {
     input.value = new URL('/thank_you', location.origin).href;
+  });
+
+  // Feedback de envío: el botón confirma la acción y evita dobles envíos.
+  const forms = document.querySelectorAll<HTMLFormElement>('[data-lead-form]');
+
+  const setSending = (form: HTMLFormElement, sending: boolean) => {
+    const button = form.querySelector<HTMLButtonElement>('[data-submit]');
+    const label = form.querySelector<HTMLElement>('[data-submit-label]');
+    if (!button || !label) return;
+    label.dataset.idle ??= label.textContent ?? '';
+    if (sending) button.setAttribute('aria-busy', 'true');
+    else button.removeAttribute('aria-busy');
+    label.textContent = sending ? 'Enviando…' : label.dataset.idle;
+  };
+
+  forms.forEach((form) => {
+    form.addEventListener('submit', (event) => {
+      const button = form.querySelector('[data-submit]');
+      if (button?.hasAttribute('aria-busy')) {
+        event.preventDefault();
+        return;
+      }
+      setSending(form, true);
+    });
+  });
+
+  // Al volver con el botón "atrás" (bfcache), el formulario queda listo de nuevo.
+  window.addEventListener('pageshow', (event) => {
+    if (event.persisted) forms.forEach((form) => setSending(form, false));
   });
 </script>

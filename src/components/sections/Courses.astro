@@ -26,7 +26,7 @@ const courses = (await getCollection('courses')).sort((a, b) => a.data.order - b
     <ul class="m-0 grid list-none grid-cols-[repeat(auto-fit,minmax(min(100%,270px),1fr))] gap-5 p-0">
       {
         courses.map(({ id, data }) => (
-          <Card as="li" tone="light" class="gap-5">
+          <Card as="li" tone="light" class="group gap-5">
             <div class="flex items-start justify-between">
               <div class="flex size-14 items-center justify-center rounded-[14px] bg-ink font-display text-xl font-black text-brand">
                 {data.code}
@@ -49,7 +49,8 @@ const courses = (await getCollection('courses')).sort((a, b) => a.data.order - b
                 </div>
               )}
             </dl>
-            <Button href={`/cursos/${id}`} variant="dark">
+            {/* Al pasar sobre la tarjeta, su acción se enciende: toda la tarjeta apunta a "Ver curso". */}
+            <Button href={`/cursos/${id}`} variant="dark" class="group-hover:bg-brand group-hover:text-ink">
               Ver curso <span class="sr-only">{data.name}</span>
             </Button>
           </Card>

@@ -4,12 +4,13 @@ import { whatsappUrl } from '../config/site';
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="¡Gracias!" noindex>
+<BaseLayout title="¡Gracias!" noindex whatsapp={false}>
   <section class="bg-ink">
     <div class="mx-auto flex max-w-[720px] flex-col items-center gap-6 px-6 py-28 text-center">
-      <div class="flex size-20 items-center justify-center rounded-full bg-brand text-ink" aria-hidden="true">
+      <!-- Confirmación: el círculo llega y el check se dibuja de un trazo. -->
+      <div class="flex size-20 animate-pop items-center justify-center rounded-full bg-brand text-ink motion-reduce:animate-none" aria-hidden="true">
         <svg viewBox="0 0 24 24" class="size-9" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M4.5 12.5l5 5 10-11" />
+          <path d="M4.5 12.5l5 5 10-11" pathLength="1" class="animate-check [stroke-dasharray:1] motion-reduce:animate-none" />
         </svg>
       </div>
       <h1 class="m-0 font-display text-[clamp(36px,5vw,60px)] leading-none font-black tracking-[-0.02em] uppercase">

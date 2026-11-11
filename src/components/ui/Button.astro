@@ -23,7 +23,8 @@ const sizes = {
 };
 
 const classes = [
-  'inline-flex items-center justify-center text-center font-display transition-colors cursor-pointer',
+  // Hover por color; al presionar, el botón se hunde levemente (feedback inmediato).
+  'inline-flex items-center justify-center text-center font-display cursor-pointer transition-[color,background-color,border-color,scale] active:scale-[0.97] active:duration-100',
   variants[variant],
   // El borde de 2px del outline se compensa con 2px menos de padding.
   variant === 'outline' && size === 'lg' ? 'px-[28px] py-4 text-[17px] rounded-[14px]' : sizes[size],

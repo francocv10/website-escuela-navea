@@ -19,6 +19,38 @@
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
   --breakpoint-nav: 900px;
+
+  /* Movimiento: desaceleración natural, feedback corto. */
+  --ease-road: cubic-bezier(0.16, 1, 0.3, 1);
+  --default-transition-duration: 180ms;
+  --default-transition-timing-function: var(--ease-road);
+
+  /* La línea de carretera avanza un ciclo (28px trazo + 24px hueco). */
+  --animate-road: road 520ms linear infinite;
+  --animate-check: check 520ms var(--ease-road) 160ms both;
+  --animate-pop: pop 420ms var(--ease-road) both;
+
+  @keyframes road {
+    to {
+      background-position-x: 52px;
+    }
+  }
+
+  @keyframes check {
+    from {
+      stroke-dashoffset: 1;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @keyframes pop {
+    from {
+      transform: scale(0.7);
+      opacity: 0;
+    }
+  }
 }
 
 @layer base {
@@ -56,6 +88,33 @@
     outline: 3px solid var(--color-brand);
     outline-offset: 3px;
   }
+
+  /* Acordeón: la respuesta se despliega en vez de aparecer de golpe (mejora progresiva). */
+  :root {
+    interpolate-size: allow-keywords;
+  }
+
+  details[data-accordion]::details-content {
+    block-size: 0;
+    overflow: clip;
+    transition:
+      block-size 320ms var(--ease-road),
+      content-visibility 320ms allow-discrete;
+  }
+
+  details[data-accordion][open]::details-content {
+    block-size: auto;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    details[data-accordion]::details-content {
+      transition: none;
+    }
+  }
 }
 
 /* Cinta de precaución (separador de sección). */
@@ -70,6 +129,11 @@
 /* Líneas de carretera discontinuas. */
 @utility road-dashes {
   background: repeating-linear-gradient(90deg, var(--color-brand) 0 28px, transparent 28px 52px);
+}
+
+/* Variante en negro, para dibujar la carretera sobre un relleno amarillo. */
+@utility road-dashes-ink {
+  background: repeating-linear-gradient(90deg, var(--color-ink) 0 28px, transparent 28px 52px);
 }
 
 /* Relleno para fotos pendientes. */

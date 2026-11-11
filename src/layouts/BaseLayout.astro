@@ -10,9 +10,11 @@ interface Props {
   description?: string;
   /** Excluir de buscadores (p. ej. la página de confirmación). */
   noindex?: boolean;
+  /** Mostrar el botón flotante de WhatsApp (se omite donde la página ya ofrece WhatsApp como acción principal). */
+  whatsapp?: boolean;
 }
 
-const { title, description = site.description, noindex = false } = Astro.props;
+const { title, description = site.description, noindex = false, whatsapp = true } = Astro.props;
 const fullTitle = title ? `${title} | ${site.name}` : `${site.name} · Quilpué`;
 const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined;
 
@@ -71,6 +73,6 @@ const jsonLd = {
       <slot />
     </main>
     <Footer />
-    <WhatsAppButton />
+    {whatsapp && <WhatsAppButton />}
   </body>
 </html>

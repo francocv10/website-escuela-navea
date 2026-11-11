@@ -20,8 +20,12 @@ const links = [
     <nav aria-label="Principal" class="hidden items-center gap-8 nav:flex">
       {
         links.map((link) => (
-          <a href={link.href} class="text-[15px] font-semibold text-white transition-colors hover:text-brand">
+          <a href={link.href} class="group relative py-1 text-[15px] font-semibold text-white transition-colors hover:text-brand">
             {link.label}
+            <!-- Marca de carril: se pinta de izquierda a derecha al pasar o enfocar. -->
+            <span
+              class="absolute bottom-0 left-0 h-0.5 w-full origin-left scale-x-0 bg-brand transition-[scale] duration-300 group-hover:scale-x-100 group-focus-visible:scale-x-100"
+              aria-hidden="true"></span>
           </a>
         ))
       }
@@ -34,19 +38,25 @@ const links = [
       aria-label="Abrir menú"
       aria-expanded="false"
       aria-controls="mobile-menu"
-      class="flex size-12 cursor-pointer flex-col items-center justify-center gap-[5px] rounded-xl border border-[#333] bg-surface nav:hidden"
+      class="group flex size-12 cursor-pointer flex-col items-center justify-center gap-[5px] rounded-xl border border-[#333] bg-surface transition-[border-color,scale] hover:border-[#4a4a4a] active:scale-95 active:duration-100 nav:hidden"
     >
-      <span class="block h-0.5 w-5 bg-brand"></span>
-      <span class="block h-0.5 w-5 bg-brand"></span>
-      <span class="block h-0.5 w-5 bg-brand"></span>
+      <!-- Las tres barras se cruzan en una X al abrir. -->
+      <span class="block h-0.5 w-5 bg-brand transition-[translate,rotate] duration-300 group-aria-expanded:translate-y-[7px] group-aria-expanded:rotate-45"></span>
+      <span class="block h-0.5 w-5 bg-brand transition-[opacity,scale] duration-200 group-aria-expanded:scale-x-0 group-aria-expanded:opacity-0"></span>
+      <span class="block h-0.5 w-5 bg-brand transition-[translate,rotate] duration-300 group-aria-expanded:-translate-y-[7px] group-aria-expanded:-rotate-45"></span>
     </button>
   </div>
 
-  <nav id="mobile-menu" aria-label="Menú móvil" hidden class="border-t border-edge bg-ink px-6 pt-4 pb-6 nav:hidden">
+  <nav
+    id="mobile-menu"
+    aria-label="Menú móvil"
+    hidden
+    class="border-t border-edge bg-ink px-6 pt-4 pb-6 transition-[opacity,translate] duration-300 starting:-translate-y-2 starting:opacity-0 motion-reduce:starting:translate-y-0 nav:hidden"
+  >
     <div class="flex flex-col gap-1">
       {
         links.map((link) => (
-          <a href={link.href} class="border-b border-[#1f1f1f] py-3 font-display text-xl font-bold text-white">
+          <a href={link.href} class="border-b border-[#1f1f1f] py-3 font-display text-xl font-bold text-white transition-colors hover:text-brand">
             {link.label}
           </a>
         ))
