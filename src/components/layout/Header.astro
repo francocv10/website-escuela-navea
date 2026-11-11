@@ -1,0 +1,72 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../../assets/logo-navea.png';
+import Button from '../ui/Button.astro';
+
+const links = [
+  { href: '/#cursos', label: 'Cursos' },
+  { href: '/#nosotros', label: 'Nosotros' },
+  { href: '/#contacto', label: 'Contacto' },
+];
+---
+
+<header class="sticky top-0 z-50 border-b border-edge bg-ink/95 backdrop-blur-md">
+  <div class="mx-auto flex max-w-[1240px] items-center justify-between gap-6 px-6 py-3.5">
+    <a href="/" class="flex items-center gap-3 text-white">
+      <Image src={logo} alt="NAVEA Escuela de Conductores" width={56} height={56} class="block size-14 rounded-full" loading="eager" />
+      <span class="font-display text-[22px] font-black tracking-[0.04em]">NAVEA</span>
+    </a>
+
+    <nav aria-label="Principal" class="hidden items-center gap-8 nav:flex">
+      {
+        links.map((link) => (
+          <a href={link.href} class="text-[15px] font-semibold text-white transition-colors hover:text-brand">
+            {link.label}
+          </a>
+        ))
+      }
+      <Button href="/registration">Inscríbete</Button>
+    </nav>
+
+    <button
+      type="button"
+      data-menu-toggle
+      aria-label="Abrir menú"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      class="flex size-12 cursor-pointer flex-col items-center justify-center gap-[5px] rounded-xl border border-[#333] bg-surface nav:hidden"
+    >
+      <span class="block h-0.5 w-5 bg-brand"></span>
+      <span class="block h-0.5 w-5 bg-brand"></span>
+      <span class="block h-0.5 w-5 bg-brand"></span>
+    </button>
+  </div>
+
+  <nav id="mobile-menu" aria-label="Menú móvil" hidden class="border-t border-edge bg-ink px-6 pt-4 pb-6 nav:hidden">
+    <div class="flex flex-col gap-1">
+      {
+        links.map((link) => (
+          <a href={link.href} class="border-b border-[#1f1f1f] py-3 font-display text-xl font-bold text-white">
+            {link.label}
+          </a>
+        ))
+      }
+      <Button href="/registration" size="lg" class="mt-4">Inscríbete</Button>
+    </div>
+  </nav>
+</header>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  const menu = document.getElementById('mobile-menu');
+
+  const setOpen = (open: boolean) => {
+    if (!toggle || !menu) return;
+    menu.hidden = !open;
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+  };
+
+  toggle?.addEventListener('click', () => setOpen(menu?.hidden ?? false));
+  menu?.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+</script>

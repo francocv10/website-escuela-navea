@@ -1,0 +1,22 @@
+---
+import PhotoPlaceholder from '../ui/PhotoPlaceholder.astro';
+import SectionHeading from '../ui/SectionHeading.astro';
+
+// TODO: reemplazar por fotos reales con <Image /> de astro:assets.
+const photos = [
+  'foto: flota de autos',
+  'foto: doble comando',
+  'foto: sala de clases',
+  'foto: fachada sede',
+  'foto: alumno en clase práctica',
+];
+---
+
+<section class="bg-ink">
+  <div class="mx-auto flex max-w-[1240px] flex-col gap-10 px-6 py-24">
+    <SectionHeading eyebrow="Flota e instalaciones" title="Autos nuevos, sala equipada" />
+    <div class="grid auto-rows-[240px] grid-cols-[repeat(auto-fit,minmax(min(100%,280px),1fr))] gap-4">
+      {photos.map((label, i) => <PhotoPlaceholder label={label} class={i === 0 ? 'row-span-2' : undefined} />)}
+    </div>
+  </div>
+</section>

@@ -1,11 +1,33 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import Benefits from '../components/sections/Benefits.astro';
+import Contact from '../components/sections/Contact.astro';
+import Courses from '../components/sections/Courses.astro';
+import CTA from '../components/sections/CTA.astro';
+import FAQ from '../components/sections/FAQ.astro';
+import Fleet from '../components/sections/Fleet.astro';
+import Hero from '../components/sections/Hero.astro';
+import HowItWorks from '../components/sections/HowItWorks.astro';
+import Instructors from '../components/sections/Instructors.astro';
+import Stats from '../components/sections/Stats.astro';
+import Testimonials from '../components/sections/Testimonials.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// Interruptores del diseño (props "showPrices" y "showStripes" del prototipo).
+const showPrices = true;
+const showStripes = true;
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<BaseLayout>
+  <Hero />
+  {showStripes && <div class="stripes h-3.5" aria-hidden="true" />}
+  <Stats />
+  <Courses showPrices={showPrices} />
+  <Benefits />
+  <HowItWorks />
+  <Fleet />
+  <Instructors />
+  <Testimonials />
+  <FAQ />
+  <CTA showStripes={showStripes} />
+  <Contact />
+</BaseLayout>

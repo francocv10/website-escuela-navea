@@ -1,0 +1,35 @@
+---
+import LeadForm from '../components/ui/LeadForm.astro';
+import { site, whatsappUrl } from '../config/site';
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Inscripción" description="Inscríbete en tu curso de conducción en NAVEA. Déjanos tus datos y te contactamos para coordinar tu primera clase.">
+  <section class="bg-ink">
+    <div class="mx-auto grid max-w-[1240px] gap-12 px-6 pt-16 pb-24 lg:grid-cols-[1fr_520px]">
+      <div class="flex flex-col gap-6">
+        <p class="m-0 font-display text-sm font-extrabold tracking-[0.14em] text-brand uppercase">Inscripción</p>
+        <h1 class="m-0 font-display text-[clamp(40px,5.6vw,72px)] leading-none font-black tracking-[-0.02em] text-balance uppercase">
+          Reserva tu primera clase
+        </h1>
+        <p class="m-0 max-w-[480px] text-[19px] text-soft">
+          Completa tus datos y te contactamos dentro del día hábil para coordinar curso, horario y forma de pago.
+        </p>
+        <p class="m-0 text-[15px] text-muted">
+          ¿Prefieres hablar ahora? Escríbenos por <a href={whatsappUrl} class="font-bold text-brand hover:text-brand-dark">WhatsApp</a> o llama al {site.phone}.
+        </p>
+      </div>
+      <div class="rounded-2xl border border-edge bg-surface/40 p-7">
+        <LeadForm variant="full" subject="Nueva inscripción desde el sitio web" submitLabel="Enviar inscripción" />
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  // Preselecciona el curso cuando se llega desde /cursos/[slug] (?curso=clase-b).
+  const slug = new URLSearchParams(location.search).get('curso');
+  const select = document.querySelector<HTMLSelectElement>('select[name="curso"]');
+  const option = slug && select ? select.querySelector<HTMLOptionElement>(`option[data-slug="${CSS.escape(slug)}"]`) : null;
+  if (option) option.selected = true;
+</script>

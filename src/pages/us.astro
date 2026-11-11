@@ -1,0 +1,38 @@
+---
+import Benefits from '../components/sections/Benefits.astro';
+import CTA from '../components/sections/CTA.astro';
+import Fleet from '../components/sections/Fleet.astro';
+import Instructors from '../components/sections/Instructors.astro';
+import Stats from '../components/sections/Stats.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Nosotros" description="Conoce la historia, la misión y el equipo de instructores de NAVEA Escuela de Conductores en Quilpué.">
+  <section class="bg-ink">
+    <div class="mx-auto grid max-w-[1240px] gap-10 px-6 pt-16 pb-20 lg:grid-cols-2 lg:items-end">
+      <div class="flex flex-col gap-4">
+        <p class="m-0 font-display text-sm font-extrabold tracking-[0.14em] text-brand uppercase">Nosotros</p>
+        <h1 class="m-0 font-display text-[clamp(40px,5.6vw,72px)] leading-none font-black tracking-[-0.02em] text-balance uppercase">
+          Formamos conductores <span class="text-brand">seguros</span>
+        </h1>
+      </div>
+      <div class="flex flex-col gap-4 text-[17px] text-soft">
+        <!-- TODO: reemplazar por la historia y misión reales de la escuela. -->
+        <p class="m-0">
+          Desde Quilpué acompañamos a quienes se ponen al volante por primera vez y a quienes buscan dar el paso a una
+          licencia profesional.
+        </p>
+        <p class="m-0">
+          Nuestra misión es que cada alumno llegue al examen preparado y salga conduciendo con confianza, con
+          instructores certificados, autos con doble comando y horarios que se adaptan a su rutina.
+        </p>
+      </div>
+    </div>
+  </section>
+  <div class="stripes h-3.5" aria-hidden="true"></div>
+  <Stats />
+  <Benefits />
+  <Instructors />
+  <Fleet />
+  <CTA />
+</BaseLayout>

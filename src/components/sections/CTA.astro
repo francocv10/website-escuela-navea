@@ -1,0 +1,22 @@
+---
+import Button from '../ui/Button.astro';
+
+interface Props {
+  showStripes?: boolean;
+}
+
+const { showStripes = true } = Astro.props;
+---
+
+<section class="bg-brand text-ink">
+  {showStripes && <div class="stripes-inverse h-3" aria-hidden="true" />}
+  <div class="mx-auto flex max-w-[1240px] flex-wrap items-center justify-between gap-8 px-6 py-20">
+    <div class="flex flex-col gap-2.5">
+      <h2 class="m-0 font-display text-[clamp(40px,5.6vw,72px)] leading-none font-black tracking-[-0.02em] uppercase">
+        ¿Listo para manejar?
+      </h2>
+      <p class="m-0 text-[19px] font-semibold">Reserva tu clase hoy</p>
+    </div>
+    <Button href="/registration" variant="dark" size="lg">Inscríbete ahora</Button>
+  </div>
+</section>

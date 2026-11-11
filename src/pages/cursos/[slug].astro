@@ -1,0 +1,105 @@
+---
+import { getCollection, render } from 'astro:content';
+import CTA from '../../components/sections/CTA.astro';
+import Badge from '../../components/ui/Badge.astro';
+import Button from '../../components/ui/Button.astro';
+import Card from '../../components/ui/Card.astro';
+import { formatCLP } from '../../config/site';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const courses = await getCollection('courses');
+  return courses.map((course) => ({ params: { slug: course.id }, props: { course } }));
+}
+
+const { course } = Astro.props;
+const { data } = course;
+const { Content } = await render(course);
+---
+
+<BaseLayout title={`Curso ${data.name}`} description={`${data.name}: ${data.description} Duración ${data.duration}, desde ${formatCLP(data.price)}.`}>
+  <section class="bg-ink">
+    <div class="mx-auto flex max-w-[1240px] flex-col gap-6 px-6 pt-16 pb-20">
+      <a href="/#cursos" class="self-start text-sm font-semibold text-muted transition-colors hover:text-brand">← Todos los cursos</a>
+      <div class="flex items-center gap-4">
+        <div class="flex size-16 items-center justify-center rounded-2xl bg-brand font-display text-2xl font-black text-ink">
+          {data.code}
+        </div>
+        <Badge>{data.tag}</Badge>
+      </div>
+      <h1 class="m-0 font-display text-[clamp(40px,5.6vw,72px)] leading-none font-black tracking-[-0.02em] uppercase">
+        Curso {data.name}
+      </h1>
+      <p class="m-0 max-w-[560px] text-[19px] text-soft">{data.description}</p>
+    </div>
+  </section>
+
+  <div class="stripes h-3.5" aria-hidden="true"></div>
+
+  <section class="bg-paper text-ink">
+    <div class="mx-auto grid max-w-[1240px] gap-10 px-6 py-20 lg:grid-cols-[1fr_380px]">
+      <div class="flex flex-col gap-10">
+        <article class="course-body flex flex-col gap-4 text-[17px]">
+          <Content />
+        </article>
+
+        <div class="grid gap-5 sm:grid-cols-2">
+          <Card tone="light" class="gap-3">
+            <h2 class="m-0 font-display text-xl font-extrabold">Requisitos</h2>
+            <ul class="m-0 flex flex-col gap-2 pl-5 text-[15px] text-[#444]">
+              {data.requirements.map((item) => <li>{item}</li>)}
+            </ul>
+          </Card>
+          <Card tone="light" class="gap-3">
+            <h2 class="m-0 font-display text-xl font-extrabold">Documentos</h2>
+            <ul class="m-0 flex flex-col gap-2 pl-5 text-[15px] text-[#444]">
+              {data.documents.map((item) => <li>{item}</li>)}
+            </ul>
+          </Card>
+        </div>
+      </div>
+
+      <aside class="lg:sticky lg:top-28 lg:self-start">
+        <div class="flex flex-col gap-5 rounded-2xl bg-ink p-7 text-white">
+          <dl class="m-0 flex flex-col gap-3 text-[15px]">
+            <div class="flex justify-between">
+              <dt class="text-muted">Duración</dt>
+              <dd class="m-0 font-bold">{data.duration}</dd>
+            </div>
+            <div class="flex items-baseline justify-between">
+              <dt class="text-muted">Desde</dt>
+              <dd class="m-0 font-display text-[28px] font-black text-brand">{formatCLP(data.price)}</dd>
+            </div>
+          </dl>
+          <Button href={`/registration?curso=${course.id}`} size="lg">Inscríbete en {data.name}</Button>
+          <p class="m-0 text-sm text-muted">Clases teóricas, prácticas y preparación para el examen municipal incluidas.</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <CTA />
+</BaseLayout>
+
+<style>
+  .course-body :global(h2) {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: clamp(28px, 3.4vw, 40px);
+    line-height: 1.1;
+  }
+
+  .course-body :global(ul) {
+    margin: 0;
+    padding-left: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    color: #333;
+  }
+
+  .course-body :global(li::marker) {
+    color: var(--color-ink);
+  }
+</style>

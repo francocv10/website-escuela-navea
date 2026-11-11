@@ -36,15 +36,18 @@ Se organiza de la siguiente forma:
 
 ```text
 src/
+├── assets/logo-navea.png  → logo (optimizado con astro:assets)
 ├── components/
-│   ├── ui/            → Button, Card, Badge, Accordion
-│   ├── sections/      → Hero, Stats, Courses, HowItWorks, Pricing,
+│   ├── ui/            → Button, Card, Badge, Accordion, SectionHeading,
+│   │                    PhotoPlaceholder, LeadForm (Web3Forms)
+│   ├── sections/      → Hero, Stats, Courses, Benefits, HowItWorks,
 │   │                    Fleet, Instructors, Testimonials, FAQ, CTA, Contact
 │   └── layout/        → Header, Footer, WhatsAppButton
+├── config/site.ts     → dirección, teléfono, WhatsApp, horarios y redes
+├── content.config.ts  → esquemas de las Content Collections
 ├── content/
-│   ├── courses/        → clase-b.md, a2.md… (una ficha por licencia)
+│   ├── courses/        → clase-b.md, a2.md, a4.md, clase-c.md (una ficha por licencia)
 │   ├── faq.json
-│   ├── plans.json
 │   └── testimonials.json
 ├── layouts/
 │   └── BaseLayout.astro  → <head>, SEO, fuentes, analítica

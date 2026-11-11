@@ -1,0 +1,28 @@
+---
+import { getCollection } from 'astro:content';
+import Accordion from '../ui/Accordion.astro';
+import SectionHeading from '../ui/SectionHeading.astro';
+
+const faqs = (await getCollection('faq')).map(({ data }) => data);
+
+// Datos estructurados FAQPage para resultados enriquecidos en Google.
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.question,
+    acceptedAnswer: { '@type': 'Answer', text: f.answer },
+  })),
+};
+---
+
+<section id="preguntas" class="bg-paper text-ink">
+  <div class="mx-auto flex max-w-[880px] flex-col gap-10 px-6 py-24">
+    <div class="flex justify-center">
+      <SectionHeading eyebrow="Preguntas frecuentes" title="Resolvemos tus dudas" eyebrowTone="muted" align="center" />
+    </div>
+    <Accordion items={faqs} name="faq" />
+  </div>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+</section>

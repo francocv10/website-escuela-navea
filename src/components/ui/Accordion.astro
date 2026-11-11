@@ -1,0 +1,40 @@
+---
+// Acordeón sin JavaScript: <details> con el mismo `name` se abren de a uno.
+interface Item {
+  id: string;
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  items: Item[];
+  name?: string;
+  openFirst?: boolean;
+}
+
+const { items, name = 'accordion', openFirst = true } = Astro.props;
+---
+
+<div class="flex flex-col gap-3">
+  {
+    items.map((item, i) => (
+      <details
+        name={name}
+        open={openFirst && i === 0}
+        class="group overflow-hidden rounded-[14px] border border-[#e6e6e6] bg-white"
+      >
+        <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-[22px] text-left text-ink [&::-webkit-details-marker]:hidden">
+          <span class="font-display text-lg font-bold">{item.question}</span>
+          <span
+            class="flex size-8 shrink-0 items-center justify-center rounded-full bg-ink text-xl leading-none font-bold text-brand"
+            aria-hidden="true"
+          >
+            <span class="group-open:hidden">+</span>
+            <span class="hidden group-open:inline">−</span>
+          </span>
+        </summary>
+        <p class="m-0 px-6 pb-6 text-base text-pretty text-[#444]">{item.answer}</p>
+      </details>
+    ))
+  }
+</div>

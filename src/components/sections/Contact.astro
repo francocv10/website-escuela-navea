@@ -1,0 +1,46 @@
+---
+import { site } from '../../config/site';
+import LeadForm from '../ui/LeadForm.astro';
+import SectionHeading from '../ui/SectionHeading.astro';
+
+const details = [
+  { label: 'Dirección', lines: [`${site.address.street}, ${site.address.city}, ${site.address.region}`] },
+  { label: 'Teléfono', lines: [site.phone] },
+  { label: 'Horario', lines: site.hours },
+];
+---
+
+<section id="contacto" class="bg-ink">
+  <div class="mx-auto grid max-w-[1240px] grid-cols-[repeat(auto-fit,minmax(min(100%,440px),1fr))] gap-12 px-6 py-24">
+    <div class="flex flex-col gap-7">
+      <SectionHeading eyebrow="Contacto" title="Te llamamos nosotros" />
+      <LeadForm />
+    </div>
+
+    <div class="flex flex-col gap-5">
+      <iframe
+        title="Ubicación de NAVEA en el mapa"
+        src={site.mapEmbedUrl}
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        class="block min-h-[340px] w-full flex-1 rounded-2xl border border-edge-2"></iframe>
+      <dl class="m-0 grid grid-cols-[repeat(auto-fit,minmax(180px,1fr))] gap-5 text-[15px]">
+        {
+          details.map((d) => (
+            <div>
+              <dt class="text-[13px] font-bold tracking-[0.08em] text-muted uppercase">{d.label}</dt>
+              <dd class="m-0">
+                {d.lines.map((line, i) => (
+                  <>
+                    {i > 0 && <br />}
+                    {line}
+                  </>
+                ))}
+              </dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </div>
+</section>

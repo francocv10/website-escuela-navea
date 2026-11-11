@@ -1,0 +1,23 @@
+---
+// Relleno provisional hasta tener fotos reales; reemplazar por <Image /> de astro:assets.
+interface Props {
+  label: string;
+  tone?: 'dark' | 'light';
+  class?: string;
+}
+
+const { label, tone = 'dark', class: className } = Astro.props;
+---
+
+<div
+  role="img"
+  aria-label={label}
+  class:list={[
+    'flex items-center justify-center rounded-2xl px-6 text-center font-mono text-[13px]',
+    tone === 'dark' ? 'photo-placeholder-dark border border-edge-2 text-[#8a8a8a]' : 'photo-placeholder-light text-[#555]',
+    className,
+  ]}
+>
+  {label}
+  <slot />
+</div>

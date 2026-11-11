@@ -1,1 +1,70 @@
 @import "tailwindcss";
+
+/* Tokens de diseño NAVEA: amarillo señal sobre negro (ver brief de diseño). */
+@theme {
+  --color-brand: #ffd400;
+  --color-brand-dark: #e6b800;
+  --color-ink: #0d0d0d;
+  --color-surface: #1a1a1a;
+  --color-surface-2: #202020;
+  --color-edge: #262626;
+  --color-edge-2: #2a2a2a;
+  --color-paper: #f5f5f5;
+  --color-muted: #9a9a9a;
+  --color-soft: #bdbdbd;
+  --color-whatsapp: #25d366;
+
+  --font-display: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Open Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --breakpoint-nav: 900px;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 88px;
+  }
+
+  body {
+    background: var(--color-ink);
+    color: #fff;
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-brand);
+    outline-offset: 3px;
+  }
+}
+
+/* Cinta de precaución (separador de sección). */
+@utility stripes {
+  background: repeating-linear-gradient(-45deg, var(--color-brand) 0 22px, var(--color-ink) 22px 44px);
+}
+
+@utility stripes-inverse {
+  background: repeating-linear-gradient(-45deg, var(--color-ink) 0 22px, var(--color-brand) 22px 44px);
+}
+
+/* Líneas de carretera discontinuas. */
+@utility road-dashes {
+  background: repeating-linear-gradient(90deg, var(--color-brand) 0 28px, transparent 28px 52px);
+}
+
+/* Relleno para fotos pendientes. */
+@utility photo-placeholder-dark {
+  background: repeating-linear-gradient(135deg, var(--color-surface) 0 14px, var(--color-surface-2) 14px 28px);
+}
+
+@utility photo-placeholder-light {
+  background: repeating-linear-gradient(135deg, #efefef 0 14px, #e6e6e6 14px 28px);
+}

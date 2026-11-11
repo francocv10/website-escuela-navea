@@ -1,0 +1,48 @@
+---
+import SectionHeading from '../ui/SectionHeading.astro';
+
+const steps = [
+  { title: 'Inscríbete', desc: 'Online, por WhatsApp o en nuestra sede. Eliges plan y horario.' },
+  { title: 'Clases teóricas', desc: 'Ley de tránsito, señales y mecánica básica, con simulador de examen.' },
+  { title: 'Clases prácticas', desc: 'Al volante desde el día uno, a tu ritmo y con doble comando.' },
+  { title: 'Examen', desc: 'Te acompañamos a la municipalidad y sales con tu licencia.' },
+];
+---
+
+<section class="bg-white text-ink">
+  <div class="mx-auto flex max-w-[1240px] flex-col gap-14 px-6 py-24">
+    <SectionHeading eyebrow="Cómo funciona" title="Cuatro paradas hasta tu licencia" eyebrowTone="ink" />
+
+    <div class="relative">
+      <!-- Carretera: solo cuando los pasos quedan en fila -->
+      <div
+        class="absolute inset-x-0 top-7 hidden h-14 items-center rounded-full bg-edge px-7 sm:flex"
+        aria-hidden="true"
+      >
+        <div class="road-dashes h-1 w-full"></div>
+      </div>
+
+      <ol class="relative m-0 grid list-none grid-cols-[repeat(auto-fit,minmax(min(100%,220px),1fr))] gap-6 p-0">
+        {
+          steps.map((step, i) => (
+            <li class="flex flex-col gap-5 pt-3">
+              <div
+                class="-mt-3 flex size-[88px] items-center justify-center rounded-full border-6 border-edge bg-brand font-display text-[32px] font-black text-ink"
+                aria-hidden="true"
+              >
+                {i + 1}
+              </div>
+              <div class="flex flex-col gap-1.5 bg-white pr-3">
+                <h3 class="m-0 font-display text-[21px] font-extrabold">
+                  <span class="sr-only">Paso {i + 1}: </span>
+                  {step.title}
+                </h3>
+                <p class="m-0 text-[15px] text-pretty">{step.desc}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,49 @@
+---
+import { getCollection } from 'astro:content';
+import { site } from '../../config/site';
+import Card from '../ui/Card.astro';
+import SectionHeading from '../ui/SectionHeading.astro';
+
+const testimonials = await getCollection('testimonials');
+---
+
+<section class="bg-ink">
+  <div class="mx-auto flex max-w-[1240px] flex-col gap-10 px-6 py-24">
+    <div class="flex flex-wrap items-end justify-between gap-5">
+      <SectionHeading eyebrow="Testimonios" title="Lo que dicen nuestros alumnos" />
+      <a
+        href={site.googleReviewsUrl}
+        class="border-b-2 border-brand pb-0.5 text-[15px] font-bold text-brand transition-colors hover:text-brand-dark"
+      >
+        Ver reseñas en Google
+      </a>
+    </div>
+
+    <ul class="m-0 grid list-none grid-cols-[repeat(auto-fit,minmax(min(100%,320px),1fr))] gap-5 p-0">
+      {
+        testimonials.map(({ data }) => (
+          <Card as="li" class="gap-[18px]">
+            <div class="text-lg tracking-[4px] text-brand" role="img" aria-label="5 de 5 estrellas">
+              ★★★★★
+            </div>
+            <blockquote class="m-0 text-[17px] leading-[1.55] text-pretty">“{data.text}”</blockquote>
+            <div class="mt-auto flex items-center gap-3">
+              <div
+                class="flex size-10 items-center justify-center rounded-full bg-edge font-display font-extrabold text-brand"
+                aria-hidden="true"
+              >
+                {data.name.charAt(0)}
+              </div>
+              <div class="leading-[1.35]">
+                <p class="m-0 text-[15px] font-bold">{data.name}</p>
+                <p class="m-0 text-sm text-muted">
+                  {data.course} · {data.source}
+                </p>
+              </div>
+            </div>
+          </Card>
+        ))
+      }
+    </ul>
+  </div>
+</section>

@@ -1,0 +1,63 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../../assets/logo-navea.png';
+import { site } from '../../config/site';
+
+const columns = [
+  {
+    title: 'Navegación',
+    links: [
+      { href: '/#cursos', label: 'Cursos' },
+      { href: '/us', label: 'Nosotros' },
+      { href: '/registration', label: 'Inscripción' },
+      { href: '/#contacto', label: 'Contacto' },
+    ],
+  },
+  {
+    title: 'Síguenos',
+    links: [
+      { href: site.social.instagram, label: 'Instagram' },
+      { href: site.social.facebook, label: 'Facebook' },
+      { href: site.social.tiktok, label: 'TikTok' },
+    ],
+  },
+  {
+    title: 'Legal',
+    links: [
+      { href: '#', label: 'Términos y condiciones' },
+      { href: '#', label: 'Privacidad' },
+    ],
+  },
+];
+---
+
+<footer class="border-t border-edge bg-ink">
+  <!-- pb amplio para que el botón flotante de WhatsApp no tape el contenido -->
+  <div class="mx-auto flex max-w-[1240px] flex-wrap justify-between gap-8 px-6 pt-12 pb-[100px]">
+    <div class="flex max-w-[320px] flex-col gap-3.5">
+      <div class="flex items-center gap-3">
+        <Image src={logo} alt="" width={48} height={48} class="block size-12 rounded-full" />
+        <span class="font-display text-xl font-black tracking-[0.04em]">NAVEA</span>
+      </div>
+      <p class="m-0 text-sm text-muted">Escuela de Conductores. Escuela autorizada por el Ministerio de Transportes.</p>
+    </div>
+
+    <div class="flex flex-wrap gap-14 text-[15px]">
+      {
+        columns.map((col) => (
+          <div class="flex flex-col gap-2">
+            <p class="m-0 font-bold">{col.title}</p>
+            {col.links.map((link) => (
+              <a href={link.href} class="text-muted transition-colors hover:text-brand">
+                {link.label}
+              </a>
+            ))}
+          </div>
+        ))
+      }
+    </div>
+  </div>
+  <div class="mx-auto max-w-[1240px] px-6 pb-8 text-[13px] text-[#6b6b6b]">
+    © {new Date().getFullYear()} {site.name}
+  </div>
+</footer>

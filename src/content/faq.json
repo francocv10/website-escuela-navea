@@ -1,0 +1,7 @@
+[
+  { "id": "requisitos-clase-b", "question": "¿Qué requisitos necesito para la Clase B?", "answer": "Tener 18 años cumplidos (o 17 con autorización notarial de tus padres), cédula de identidad vigente y certificado de estudios de enseñanza básica." },
+  { "id": "edad-minima", "question": "¿Cuál es la edad mínima?", "answer": "Puedes comenzar el curso de Clase B desde los 17 años con autorización. Las licencias profesionales requieren 20 años y 2 años de licencia Clase B." },
+  { "id": "documentos", "question": "¿Qué documentos debo traer?", "answer": "Cédula de identidad, certificado de estudios y, si eres menor de 18, la autorización notarial. Te ayudamos con el resto del trámite." },
+  { "id": "repruebo", "question": "¿Qué pasa si repruebo el examen?", "answer": "Te preparamos con clases de refuerzo a precio preferencial y te acompañamos hasta que obtengas tu licencia." },
+  { "id": "formas-de-pago", "question": "¿Qué formas de pago aceptan?", "answer": "Efectivo, transferencia, tarjetas de débito y crédito. Con crédito puedes pagar en cuotas." }
+]

@@ -1,0 +1,109 @@
+---
+// Formulario de contacto/inscripción enviado a Web3Forms.
+// Tras el envío, Web3Forms redirige a /thank_you (sirve para medir conversiones).
+import { getCollection } from 'astro:content';
+
+interface Props {
+  /** `short`: nombre, teléfono y curso (sección Contacto). `full`: agrega correo, horario y mensaje. */
+  variant?: 'short' | 'full';
+  subject?: string;
+  submitLabel?: string;
+  /** Slug del curso preseleccionado. */
+  selected?: string;
+}
+
+const {
+  variant = 'short',
+  subject = 'Nuevo contacto desde el sitio web',
+  submitLabel = 'Quiero que me contacten',
+  selected,
+} = Astro.props;
+
+const courses = (await getCollection('courses')).sort((a, b) => a.data.order - b.data.order);
+const accessKey = import.meta.env.PUBLIC_WEB3FORMS_KEY;
+
+const labelClass = 'flex flex-col gap-2 text-sm font-semibold text-soft';
+const fieldClass =
+  'h-[54px] rounded-xl border border-[#333] bg-surface px-4 text-base text-white outline-none placeholder:text-[#6b6b6b] focus:border-brand';
+---
+
+<form action="https://api.web3forms.com/submit" method="POST" class="flex flex-col gap-4" data-lead-form>
+  <input type="hidden" name="access_key" value={accessKey} />
+  <input type="hidden" name="subject" value={subject} />
+  <input type="hidden" name="from_name" value="Sitio web NAVEA" />
+  <input type="hidden" name="redirect" value="/thank_you" data-redirect />
+  <!-- Honeypot anti-spam de Web3Forms -->
+  <input type="checkbox" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" />
+
+  <label class={labelClass}>
+    Nombre
+    <input name="nombre" required autocomplete="name" placeholder="Tu nombre" class={fieldClass} />
+  </label>
+
+  <label class={labelClass}>
+    Teléfono
+    <input name="telefono" type="tel" required autocomplete="tel" placeholder="+56 9 ..." class={fieldClass} />
+  </label>
+
+  {
+    variant === 'full' && (
+      <label class={labelClass}>
+        Correo electrónico
+        <input name="email" type="email" autocomplete="email" placeholder="tu@correo.cl" class={fieldClass} />
+      </label>
+    )
+  }
+
+  <label class={labelClass}>
+    Curso de interés
+    <select name="curso" class={fieldClass}>
+      {
+        courses.map((course) => (
+          <option value={course.data.name} data-slug={course.id} selected={course.id === selected}>
+            {course.data.name}
+          </option>
+        ))
+      }
+      <option value="Aún no lo sé">Aún no lo sé</option>
+    </select>
+  </label>
+
+  {
+    variant === 'full' && (
+      <>
+        <label class={labelClass}>
+          Horario preferido
+          <select name="horario" class={fieldClass}>
+            <option>Mañana (9:00–13:00)</option>
+            <option>Tarde (14:00–18:00)</option>
+            <option>Después del trabajo (18:00–20:00)</option>
+            <option>Sábado (9:00–14:00)</option>
+          </select>
+        </label>
+        <label class={labelClass}>
+          Mensaje (opcional)
+          <textarea
+            name="mensaje"
+            rows="4"
+            placeholder="Cuéntanos cualquier detalle que debamos saber"
+            class={`${fieldClass} h-auto py-3`}
+          />
+        </label>
+      </>
+    )
+  }
+
+  <button
+    type="submit"
+    class="mt-2 h-[58px] cursor-pointer rounded-xl bg-brand font-display text-[17px] font-extrabold text-ink transition-colors hover:bg-brand-dark"
+  >
+    {submitLabel}
+  </button>
+</form>
+
+<script>
+  // Web3Forms necesita una URL absoluta para redirigir.
+  document.querySelectorAll<HTMLInputElement>('[data-lead-form] [data-redirect]').forEach((input) => {
+    input.value = new URL('/thank_you', location.origin).href;
+  });
+</script>
