@@ -1,5 +1,6 @@
 ---
-// Acordeón sin JavaScript: <details> con el mismo `name` se abren de a uno.
+// Acordeón sobre <details>: sin JS funciona de forma nativa (mismo `name` = se abren de a uno).
+// Con JS, el script anima apertura/cierre (altura + fundido del contenido) en todos los navegadores.
 interface Item {
   id: string;
   question: string;
@@ -17,27 +18,135 @@ const { items, name = 'accordion', openFirst = true } = Astro.props;
 
 <div class="flex flex-col gap-3">
   {
-    items.map((item, i) => (
-      <details
-        name={name}
-        open={openFirst && i === 0}
-        data-accordion
-        class="group overflow-hidden rounded-[14px] border border-[#e6e6e6] bg-white transition-colors hover:border-ink open:border-ink"
-      >
-        <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-[22px] text-left text-ink [&::-webkit-details-marker]:hidden">
-          <span class="font-display text-lg font-bold">{item.question}</span>
-          <span
-            class="flex size-8 shrink-0 items-center justify-center rounded-full bg-ink text-brand transition-[rotate] duration-300 group-open:rotate-180 motion-reduce:transition-none"
-            aria-hidden="true"
-          >
-            <svg viewBox="0 0 16 16" class="size-3.5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
-              <path d="M2 8h12" />
-              <path d="M8 2v12" class="origin-center transition-transform duration-300 group-open:scale-y-0" />
-            </svg>
-          </span>
-        </summary>
-        <p class="m-0 px-6 pb-6 text-base text-pretty text-[#444]">{item.answer}</p>
-      </details>
-    ))
+    items.map((item, i) => {
+      const isOpen = openFirst && i === 0;
+      return (
+        <details
+          name={name}
+          open={isOpen}
+          data-accordion
+          data-accordion-group={name}
+          data-expanded={isOpen ? '' : undefined}
+          class="group overflow-hidden rounded-[14px] border border-[#e6e6e6] bg-white transition-[border-color,box-shadow] duration-300 hover:border-ink data-expanded:border-ink data-expanded:shadow-[0_10px_30px_-18px_rgb(0_0_0/0.35)]"
+        >
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-[22px] text-left text-ink [&::-webkit-details-marker]:hidden">
+            <span class="font-display text-lg font-bold">{item.question}</span>
+            <span
+              class="flex size-8 shrink-0 items-center justify-center rounded-full bg-ink text-brand transition-[rotate] duration-500 group-data-expanded:rotate-180 motion-reduce:transition-none"
+              aria-hidden="true"
+            >
+              <svg viewBox="0 0 16 16" class="size-3.5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                <path d="M2 8h12" />
+                <path d="M8 2v12" class="origin-center transition-transform duration-500 group-data-expanded:scale-y-0" />
+              </svg>
+            </span>
+          </summary>
+          <p data-accordion-content class="m-0 px-6 pb-6 text-base text-pretty text-[#444]">
+            {item.answer}
+          </p>
+        </details>
+      );
+    })
   }
 </div>
+
+<script>
+  const EASE = 'cubic-bezier(0.33, 1, 0.68, 1)'; // ease-out suave, sin frenazo brusco
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  type Controller = { open: () => void; close: () => void };
+  const controllers = new WeakMap<HTMLDetailsElement, Controller>();
+
+  function enhance(details: HTMLDetailsElement) {
+    const summary = details.querySelector('summary');
+    const content = details.querySelector<HTMLElement>('[data-accordion-content]');
+    if (!summary || !content) return;
+
+    const group = details.dataset.accordionGroup;
+    // La exclusividad nativa de `name` cierra los hermanos de golpe; la manejamos aquí para animarla.
+    details.removeAttribute('name');
+
+    let expanded = details.open;
+    let heightAnim: Animation | null = null;
+    let contentAnim: Animation | null = null;
+
+    const setExpanded = (value: boolean) => {
+      expanded = value;
+      details.toggleAttribute('data-expanded', value);
+    };
+
+    const closedHeight = () => summary.offsetHeight + (details.offsetHeight - details.clientHeight);
+
+    const animate = (opening: boolean) => {
+      setExpanded(opening);
+
+      if (reducedMotion.matches) {
+        heightAnim?.cancel();
+        contentAnim?.cancel();
+        details.open = opening;
+        return;
+      }
+
+      // Partimos desde la altura actual (permite invertir una animación a mitad de camino).
+      const from = details.offsetHeight;
+      heightAnim?.cancel();
+      contentAnim?.cancel();
+
+      if (opening) details.open = true;
+      const to = opening ? details.offsetHeight : closedHeight();
+      const distance = Math.abs(to - from);
+      const duration = Math.min(560, Math.max(320, distance * 2.2));
+
+      heightAnim = details.animate(
+        { height: [`${from}px`, `${to}px`] },
+        { duration, easing: EASE, fill: 'forwards' },
+      );
+
+      contentAnim = opening
+        ? content.animate(
+            { opacity: [0, 1], transform: ['translateY(-8px)', 'translateY(0)'] },
+            { duration: duration * 0.85, delay: duration * 0.15, easing: EASE, fill: 'backwards' },
+          )
+        : content.animate(
+            { opacity: [1, 0], transform: ['translateY(0)', 'translateY(-6px)'] },
+            { duration: duration * 0.55, easing: 'ease-in', fill: 'forwards' },
+          );
+
+      const current = heightAnim;
+      current.onfinish = () => {
+        if (heightAnim !== current) return;
+        if (!opening) details.open = false;
+        heightAnim?.cancel();
+        contentAnim?.cancel();
+        heightAnim = contentAnim = null;
+      };
+    };
+
+    const controller: Controller = {
+      open: () => !expanded && animate(true),
+      close: () => expanded && animate(false),
+    };
+    controllers.set(details, controller);
+
+    summary.addEventListener('click', (event) => {
+      event.preventDefault();
+      if (expanded) {
+        controller.close();
+        return;
+      }
+      document
+        .querySelectorAll<HTMLDetailsElement>(`details[data-accordion-group="${group}"]`)
+        .forEach((other) => {
+          if (other !== details) controllers.get(other)?.close();
+        });
+      controller.open();
+    });
+
+    // Aperturas que no pasan por el clic (p. ej. buscar en la página con Ctrl+F).
+    details.addEventListener('toggle', () => {
+      if (!heightAnim && details.open !== expanded) setExpanded(details.open);
+    });
+  }
+
+  document.querySelectorAll<HTMLDetailsElement>('details[data-accordion]').forEach(enhance);
+</script>
