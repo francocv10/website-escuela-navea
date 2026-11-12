@@ -14,7 +14,7 @@ export const site = {
   phone: '+56 9 6857 2157',
   whatsapp: '56968572157',
   whatsappMessage: 'Hola, quiero información sobre los cursos de NAVEA.',
-  hours: ['Lun a Vie 9:00–20:00', 'Sáb 9:00–14:00'],
+  hours: ['Lunes a Viernes 9:00–18:30', 'Sábado 9:00–14:00'],
   googleRating: '4,9',
   googleReviewsUrl: '#', // provisorio
   social: {
