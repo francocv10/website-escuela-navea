@@ -1,0 +1,176 @@
+---
+import { site, whatsappUrl } from '../config/site';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// TODO: revisar el texto con el cliente (razón social, RUT, correo de contacto y plazos de conservación)
+// y actualizar los proveedores cuando se definan el hosting y la analítica.
+const updated = '12 de noviembre de 2026';
+
+const providers = [
+  {
+    name: 'Web3Forms',
+    purpose: 'Recibe los formularios del sitio y nos los envía por correo.',
+  },
+  {
+    name: 'WhatsApp (Meta)',
+    purpose: 'Canal de mensajería, solo si decides escribirnos por ese medio.',
+  },
+  {
+    name: 'Google (Maps y Google Fonts)',
+    purpose: 'Muestra el mapa de ubicación y las tipografías del sitio; recibe datos técnicos como tu dirección IP.',
+  },
+  {
+    name: 'Proveedor de hosting',
+    purpose: 'Aloja el sitio y registra datos técnicos de las visitas por razones de seguridad.',
+  },
+];
+
+const linkClass = 'font-semibold text-brand underline underline-offset-2 hover:text-brand-dark';
+---
+
+<BaseLayout
+  title="Política de privacidad"
+  description={`Cómo ${site.name} recopila, usa y protege tus datos personales.`}
+>
+  <section class="bg-ink">
+    <div class="mx-auto flex max-w-[820px] flex-col gap-8 px-6 pt-16 pb-24 text-[17px] text-soft">
+      <header class="flex flex-col gap-3">
+        <h1 class="m-0 font-display text-[clamp(36px,5vw,56px)] leading-none font-black tracking-[-0.02em] text-white uppercase">
+          Política de privacidad
+        </h1>
+        <p class="m-0 text-sm text-muted">Última actualización: {updated}</p>
+      </header>
+
+      <p class="m-0">
+        En {site.name} cuidamos tus datos personales. Esta política explica qué datos recopilamos a través de este sitio,
+        para qué los usamos y cómo puedes ejercer tus derechos, conforme a la Ley N° 19.628 sobre protección de la vida
+        privada y sus modificaciones, incluida la Ley N° 21.719.
+      </p>
+
+      <div class="flex flex-col gap-3">
+        <h2 class="m-0 font-display text-2xl font-extrabold text-white">Responsable del tratamiento</h2>
+        <p class="m-0">
+          El responsable de tus datos es {site.name}, con domicilio en {site.address.street}, {site.address.city},{' '}
+          {site.address.region}, Chile.
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-3">
+        <h2 class="m-0 font-display text-2xl font-extrabold text-white">Qué datos recopilamos</h2>
+        <ul class="m-0 flex flex-col gap-2 pl-5">
+          <li>
+            <strong class="text-white">Formularios de contacto e inscripción:</strong> nombre, teléfono y curso de interés.
+            En la inscripción, además y de forma opcional, correo electrónico, horario preferido y el mensaje que nos
+            escribas.
+          </li>
+          <li>
+            <strong class="text-white">Mensajes por WhatsApp o teléfono:</strong> los datos que nos compartas al
+            contactarnos.
+          </li>
+          <li>
+            <strong class="text-white">Datos técnicos:</strong> dirección IP, tipo de navegador y tu preferencia de
+            cookies (ver la <a href="/cookies" class={linkClass}>política de cookies</a>).
+          </li>
+        </ul>
+        <p class="m-0">No solicitamos datos sensibles a través del sitio. Te pedimos no incluirlos en tus mensajes.</p>
+      </div>
+
+      <div class="flex flex-col gap-3">
+        <h2 class="m-0 font-display text-2xl font-extrabold text-white">Para qué los usamos</h2>
+        <ul class="m-0 flex flex-col gap-2 pl-5">
+          <li>Responder tus consultas y enviarte la información que pediste sobre cursos, precios y horarios.</li>
+          <li>Gestionar tu inscripción y coordinar tus clases.</li>
+          <li>Mantener el sitio funcionando de forma segura.</li>
+        </ul>
+        <p class="m-0">
+          Tratamos tus datos porque nos los entregas voluntariamente para que te contactemos (tu consentimiento) y, si te
+          inscribes, porque son necesarios para prestarte el curso. No los usamos para enviarte publicidad sin tu
+          autorización ni para tomar decisiones automatizadas sobre ti.
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-3">
+        <h2 class="m-0 font-display text-2xl font-extrabold text-white">Con quién los compartimos</h2>
+        <p class="m-0">
+          No vendemos ni arrendamos tus datos. Solo los comparten con nosotros los proveedores que necesitamos para operar
+          el sitio, que los tratan por nuestra cuenta:
+        </p>
+        <ul class="m-0 flex flex-col gap-2 pl-5">
+          {
+            providers.map((p) => (
+              <li>
+                <strong class="text-white">{p.name}:</strong> {p.purpose}
+              </li>
+            ))
+          }
+        </ul>
+        <p class="m-0">
+          Algunos de estos proveedores almacenan información en servidores fuera de Chile, con medidas de seguridad
+          adecuadas. También podríamos entregar datos a autoridades cuando la ley lo exija.
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-3">
+        <h2 class="m-0 font-display text-2xl font-extrabold text-white">Cuánto tiempo los guardamos</h2>
+        <p class="m-0">
+          Si nos escribiste pero no te inscribiste, guardamos tus datos solo el tiempo necesario para responder y hacer
+          seguimiento a tu consulta, y luego los eliminamos. Si te inscribes, los conservamos mientras dure el curso y
+          durante los plazos que exijan nuestras obligaciones legales y tributarias.
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-3">
+        <h2 class="m-0 font-display text-2xl font-extrabold text-white">Tus derechos</h2>
+        <p class="m-0">En cualquier momento puedes solicitarnos:</p>
+        <ul class="m-0 flex flex-col gap-2 pl-5">
+          <li><strong class="text-white">Acceso:</strong> saber qué datos tuyos tenemos y cómo los usamos.</li>
+          <li><strong class="text-white">Rectificación:</strong> corregir datos inexactos o incompletos.</li>
+          <li><strong class="text-white">Supresión:</strong> eliminar tus datos cuando ya no sean necesarios.</li>
+          <li><strong class="text-white">Oposición:</strong> que dejemos de usar tus datos para un fin determinado.</li>
+          <li><strong class="text-white">Portabilidad:</strong> recibir tus datos en un formato de uso común.</li>
+          <li><strong class="text-white">Bloqueo:</strong> suspender temporalmente su uso mientras revisamos tu solicitud.</li>
+        </ul>
+        <p class="m-0">
+          También puedes retirar tu consentimiento cuando quieras, sin que afecte lo realizado antes. Para ejercer estos
+          derechos, contáctanos por los canales indicados abajo; responderemos dentro de los plazos legales. Si no quedas
+          conforme, puedes recurrir a la Agencia de Protección de Datos Personales.
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-3">
+        <h2 class="m-0 font-display text-2xl font-extrabold text-white">Menores de edad</h2>
+        <p class="m-0">
+          Si tienes menos de 18 años, por ejemplo para el curso Clase B desde los 17, te pedimos contactarnos junto a tu
+          madre, padre o apoderado, quien deberá autorizar el tratamiento de tus datos.
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-3">
+        <h2 class="m-0 font-display text-2xl font-extrabold text-white">Seguridad</h2>
+        <p class="m-0">
+          El sitio usa conexión cifrada (HTTPS) y limitamos el acceso a tus datos al personal que los necesita para
+          atenderte. Ningún sistema es infalible: si detectamos un incidente que afecte tus datos, te lo informaremos
+          según lo exige la ley.
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-3">
+        <h2 class="m-0 font-display text-2xl font-extrabold text-white">Cambios a esta política</h2>
+        <p class="m-0">
+          Podemos actualizar esta política para reflejar cambios en el sitio o en la ley. Publicaremos la nueva versión en
+          esta página con su fecha de actualización.
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-3">
+        <h2 class="m-0 font-display text-2xl font-extrabold text-white">Contacto</h2>
+        <p class="m-0">
+          Para consultas sobre tus datos, escríbenos por{' '}
+          <a href={whatsappUrl} target="_blank" rel="noopener" class={linkClass}>WhatsApp</a>, llámanos al{' '}
+          <a href={`tel:${site.phone.replaceAll(' ', '')}`} class={linkClass}>{site.phone}</a> o visítanos en{' '}
+          {site.address.street}, {site.address.city}.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

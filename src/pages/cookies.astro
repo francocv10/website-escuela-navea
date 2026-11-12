@@ -88,14 +88,14 @@ const cookies = [
       <div class="flex flex-col gap-3">
         <h2 class="m-0 font-display text-2xl font-extrabold text-white">¿Cómo gestionarlas?</h2>
         <p class="m-0">
-          Puedes cambiar tu elección en cualquier momento desde
+          Puedes cambiar tu elección en cualquier momento desde{' '}
           <button
             type="button"
             data-cookie-settings
             class="cursor-pointer font-semibold text-brand underline underline-offset-2 hover:text-brand-dark"
           >
             la configuración de cookies
-          </button>
+          </button>{' '}
           (también disponible en el pie de página). Además, puedes bloquear o eliminar cookies desde la configuración de
           tu navegador; si bloqueas las necesarias, algunas partes del sitio podrían no funcionar correctamente.
         </p>
@@ -105,6 +105,10 @@ const cookies = [
         <h2 class="m-0 font-display text-2xl font-extrabold text-white">Contacto</h2>
         <p class="m-0">
           Si tienes dudas sobre esta política, escríbenos o visítanos en {site.address.street}, {site.address.city}.
+          Para saber cómo tratamos tus datos personales, revisa nuestra{' '}
+          <a href="/privacy" class="font-semibold text-brand underline underline-offset-2 hover:text-brand-dark">
+            política de privacidad</a
+          >.
         </p>
       </div>
     </div>
