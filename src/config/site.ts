@@ -11,16 +11,15 @@ export const site = {
     region: 'Región de Valparaíso',
     country: 'CL',
   },
-  phone: '+56 9 0000 0000', // provisorio
-  whatsapp: '56900000000', // provisorio, formato internacional sin "+"
+  phone: '+56 9 6857 2157',
+  whatsapp: '56968572157',
   whatsappMessage: 'Hola, quiero información sobre los cursos de NAVEA.',
   hours: ['Lun a Vie 9:00–20:00', 'Sáb 9:00–14:00'],
   googleRating: '4,9',
   googleReviewsUrl: '#', // provisorio
   social: {
-    instagram: '#', // provisorio
-    facebook: '#', // provisorio
-    tiktok: '#', // provisorio
+    instagram: 'https://www.instagram.com/escuela.navea/?hl=es',
+    facebook: 'https://www.facebook.com/escuelaconductores.vbf/?locale=es_LA',
   },
   mapEmbedUrl:
     'https://maps.google.com/maps?q=Calle%20Irarr%C3%A1saval%20656%2C%20Quilpu%C3%A9%2C%20Valpara%C3%ADso%2C%20Chile&z=16&output=embed',
