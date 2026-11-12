@@ -1,0 +1,112 @@
+---
+import { site } from '../config/site';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// TODO: revisar el texto con el cliente y actualizar la tabla cuando se defina la analítica / píxeles de redes.
+const updated = '12 de noviembre de 2026';
+
+const cookies = [
+  {
+    name: 'navea_consent',
+    owner: 'NAVEA (propia)',
+    purpose: 'Recordar tus preferencias de cookies.',
+    category: 'Necesaria',
+    duration: '180 días',
+  },
+  {
+    name: 'Cookies de Google Maps',
+    owner: 'Google (tercero)',
+    purpose: 'Mostrar el mapa con nuestra ubicación en la sección de contacto.',
+    category: 'Necesaria para el mapa',
+    duration: 'Según Google',
+  },
+];
+---
+
+<BaseLayout title="Política de cookies" description={`Qué cookies usa el sitio de ${site.name} y cómo gestionarlas.`}>
+  <section class="bg-ink">
+    <div class="mx-auto flex max-w-[820px] flex-col gap-8 px-6 pt-16 pb-24 text-[17px] text-soft">
+      <header class="flex flex-col gap-3">
+        <h1 class="m-0 font-display text-[clamp(36px,5vw,56px)] leading-none font-black tracking-[-0.02em] text-white uppercase">
+          Política de cookies
+        </h1>
+        <p class="m-0 text-sm text-muted">Última actualización: {updated}</p>
+      </header>
+
+      <div class="flex flex-col gap-3">
+        <h2 class="m-0 font-display text-2xl font-extrabold text-white">¿Qué son las cookies?</h2>
+        <p class="m-0">
+          Son pequeños archivos que un sitio web guarda en tu navegador para recordar información sobre tu visita. Algunas
+          son necesarias para que el sitio funcione; otras, como las de analítica o marketing, solo se usan si las
+          aceptas.
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-3">
+        <h2 class="m-0 font-display text-2xl font-extrabold text-white">Tipos de cookies</h2>
+        <ul class="m-0 flex flex-col gap-2 pl-5">
+          <li><strong class="text-white">Necesarias:</strong> permiten el funcionamiento básico del sitio y recordar tu elección sobre cookies.</li>
+          <li><strong class="text-white">Analítica:</strong> nos ayudan a entender cómo se usa el sitio para mejorarlo. Solo con tu consentimiento.</li>
+          <li><strong class="text-white">Marketing:</strong> permiten medir campañas en redes sociales. Solo con tu consentimiento.</li>
+        </ul>
+      </div>
+
+      <div class="flex flex-col gap-3">
+        <h2 class="m-0 font-display text-2xl font-extrabold text-white">Cookies que usamos</h2>
+        <div class="overflow-x-auto rounded-xl border border-edge-2">
+          <table class="w-full min-w-[560px] border-collapse text-left text-[15px]">
+            <thead class="bg-surface text-white">
+              <tr>
+                <th class="p-3 font-bold">Cookie</th>
+                <th class="p-3 font-bold">Titular</th>
+                <th class="p-3 font-bold">Finalidad</th>
+                <th class="p-3 font-bold">Tipo</th>
+                <th class="p-3 font-bold">Duración</th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                cookies.map((c) => (
+                  <tr class="border-t border-edge-2">
+                    <td class="p-3 font-mono text-[13px] text-white">{c.name}</td>
+                    <td class="p-3">{c.owner}</td>
+                    <td class="p-3">{c.purpose}</td>
+                    <td class="p-3">{c.category}</td>
+                    <td class="p-3">{c.duration}</td>
+                  </tr>
+                ))
+              }
+            </tbody>
+          </table>
+        </div>
+        <p class="m-0">
+          Por ahora no usamos cookies de analítica ni de marketing. Si las incorporamos, se agregarán a esta tabla y solo
+          se activarán si las aceptas.
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-3">
+        <h2 class="m-0 font-display text-2xl font-extrabold text-white">¿Cómo gestionarlas?</h2>
+        <p class="m-0">
+          Puedes cambiar tu elección en cualquier momento desde
+          <button
+            type="button"
+            data-cookie-settings
+            class="cursor-pointer font-semibold text-brand underline underline-offset-2 hover:text-brand-dark"
+          >
+            la configuración de cookies
+          </button>
+          (también disponible en el pie de página). Además, puedes bloquear o eliminar cookies desde la configuración de
+          tu navegador; si bloqueas las necesarias, algunas partes del sitio podrían no funcionar correctamente.
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-3">
+        <h2 class="m-0 font-display text-2xl font-extrabold text-white">Contacto</h2>
+        <p class="m-0">
+          Si tienes dudas sobre esta política, escríbenos o visítanos en {site.address.street}, {site.address.city}.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

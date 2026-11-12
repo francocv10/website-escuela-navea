@@ -26,9 +26,12 @@ const columns = [
     links: [
       { href: '#', label: 'Términos y condiciones' },
       { href: '#', label: 'Privacidad' },
+      { href: '/cookies', label: 'Política de cookies' },
     ],
   },
 ];
+
+const linkClass = 'text-muted transition-colors hover:text-brand';
 ---
 
 <footer class="border-t border-edge bg-ink">
@@ -47,10 +50,15 @@ const columns = [
           <div class="flex flex-col gap-2">
             <p class="m-0 font-bold">{col.title}</p>
             {col.links.map((link) => (
-              <a href={link.href} class="text-muted transition-colors hover:text-brand">
+              <a href={link.href} class={linkClass}>
                 {link.label}
               </a>
             ))}
+            {col.title === 'Legal' && (
+              <button type="button" data-cookie-settings class:list={[linkClass, 'cursor-pointer text-left']}>
+                Configurar cookies
+              </button>
+            )}
           </div>
         ))
       }
