@@ -32,21 +32,23 @@ const categories = [
   hidden
   class="fixed inset-x-4 bottom-4 z-70 mx-auto max-w-[760px] rounded-2xl border border-edge-2 bg-surface p-5 shadow-[0_12px_40px_rgba(0,0,0,0.5)] sm:p-6"
 >
-  <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6">
-    <p class="m-0 text-[15px] text-soft">
-      Usamos cookies propias y de terceros para que el sitio funcione y, si lo aceptas, para analizar su uso.
-      <a href="/cookies" class="font-semibold text-white underline underline-offset-2 hover:text-brand">Más información</a>
+  <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between md:gap-8">
+    <p class="m-0 text-[15px] leading-relaxed text-soft">
+      Usamos cookies propias y de terceros para que el sitio funcione y, si lo aceptas, para analizar su uso.{' '}
+      <a href="/cookies" class="font-semibold whitespace-nowrap text-white underline underline-offset-2 hover:text-brand">
+        Más información
+      </a>
     </p>
-    <div class="flex shrink-0 flex-wrap gap-2.5">
-      <Button data-cookie-action="reject" variant="outline" size="sm" class="flex-1 sm:flex-none">Rechazar</Button>
-      <Button data-cookie-action="accept" size="sm" class="flex-1 sm:flex-none">Aceptar</Button>
+    <div class="flex shrink-0 flex-wrap items-center gap-2.5">
       <button
         type="button"
         data-cookie-settings
-        class="w-full cursor-pointer text-sm font-semibold text-muted underline underline-offset-2 transition-colors hover:text-brand"
+        class="order-last w-full cursor-pointer py-1 text-sm font-semibold text-muted underline underline-offset-2 transition-colors hover:text-brand md:order-first md:mr-2 md:w-auto"
       >
         Configurar
       </button>
+      <Button data-cookie-action="reject" variant="outline" size="sm" class="min-w-[112px] flex-1 md:flex-none">Rechazar</Button>
+      <Button data-cookie-action="accept" size="sm" class="min-w-[112px] flex-1 md:flex-none">Aceptar</Button>
     </div>
   </div>
 </div>
@@ -63,78 +65,46 @@ const categories = [
         &times;
       </button>
     </div>
-    <p class="m-0 text-[15px] text-soft">
-      Elige qué cookies permites. Puedes cambiar tu elección cuando quieras desde el pie de página.
-      <a href="/cookies" class="font-semibold text-white underline underline-offset-2 hover:text-brand">Política de cookies</a>
+    <p class="m-0 text-[15px] leading-relaxed text-soft">
+      Elige qué cookies permites. Puedes cambiar tu elección cuando quieras desde el pie de página.{' '}
+      <a href="/cookies" class="font-semibold whitespace-nowrap text-white underline underline-offset-2 hover:text-brand">
+        Política de cookies
+      </a>
     </p>
     <ul class="m-0 flex list-none flex-col gap-3 p-0">
       {
         categories.map((c) => (
           <li class="rounded-xl border border-edge-2 bg-ink p-4">
-            <label class="flex cursor-pointer items-start justify-between gap-4">
+            <label class:list={['flex items-center justify-between gap-5', !c.locked && 'cursor-pointer']}>
               <span class="flex flex-col gap-1">
                 <span class="font-bold">{c.title}</span>
-                <span class="text-sm text-muted">{c.text}</span>
+                <span class="text-sm leading-relaxed text-muted">{c.text}</span>
               </span>
-              <input
-                type="checkbox"
-                name={c.id}
-                checked={c.locked}
-                disabled={c.locked}
-                class="mt-1 size-5 shrink-0 cursor-pointer disabled:cursor-not-allowed"
-              />
+              {c.locked ? (
+                <span class="shrink-0 rounded-full bg-brand/15 px-2.5 py-1 text-xs font-bold whitespace-nowrap text-brand">
+                  Siempre activas
+                </span>
+              ) : (
+                <input
+                  type="checkbox"
+                  role="switch"
+                  name={c.id}
+                  class="relative h-6 w-11 shrink-0 cursor-pointer appearance-none rounded-full bg-white/20 transition-colors duration-200 outline-offset-2 before:absolute before:top-0.5 before:left-0.5 before:size-5 before:rounded-full before:bg-white before:transition-transform before:duration-200 checked:bg-brand checked:before:translate-x-5 checked:before:bg-ink focus-visible:outline-2 focus-visible:outline-brand motion-reduce:transition-none motion-reduce:before:transition-none"
+                />
+              )}
             </label>
           </li>
         ))
       }
     </ul>
-    <div class="flex flex-wrap justify-end gap-2.5">
-      <Button data-cookie-action="reject" variant="outline" size="sm">Rechazar todas</Button>
-      <Button data-cookie-action="save" variant="outline" size="sm">Guardar selección</Button>
-      <Button data-cookie-action="accept" size="sm">Aceptar todas</Button>
+    <div class="flex flex-col-reverse gap-2.5 border-t border-edge-2 pt-5 sm:flex-row sm:justify-end">
+      <Button data-cookie-action="reject" variant="outline" size="sm" class="w-full sm:w-auto">Rechazar todas</Button>
+      <Button data-cookie-action="save" variant="outline" size="sm" class="w-full sm:w-auto">Guardar selección</Button>
+      <Button data-cookie-action="accept" size="sm" class="w-full sm:w-auto">Aceptar todas</Button>
     </div>
   </form>
 </dialog>
 
 <script>
-  import { activateScripts, readConsent, saveConsent, type ConsentCategory } from '../../scripts/consent';
-
-  const banner = document.getElementById('cookie-banner') as HTMLElement;
-  const dialog = document.getElementById('cookie-settings') as HTMLDialogElement;
-  const toggles = dialog.querySelectorAll<HTMLInputElement>('input[type="checkbox"]:not(:disabled)');
-
-  const existing = readConsent();
-  if (existing) activateScripts(existing);
-  else banner.hidden = false;
-
-  function decide(choice: Record<ConsentCategory, boolean>) {
-    saveConsent(choice);
-    banner.hidden = true;
-    if (dialog.open) dialog.close();
-  }
-
-  function selection() {
-    const choice = { analytics: false, marketing: false };
-    toggles.forEach((t) => (choice[t.name as ConsentCategory] = t.checked));
-    return choice;
-  }
-
-  document.addEventListener('click', (event) => {
-    const target = event.target as Element;
-
-    if (target.closest('[data-cookie-settings]')) {
-      event.preventDefault();
-      const current = readConsent();
-      toggles.forEach((t) => (t.checked = current?.[t.name as ConsentCategory] ?? false));
-      dialog.showModal();
-      return;
-    }
-
-    const action = target.closest<HTMLElement>('[data-cookie-action]')?.dataset.cookieAction;
-    if (!action) return;
-    event.preventDefault();
-    if (action === 'accept') decide({ analytics: true, marketing: true });
-    else if (action === 'reject') decide({ analytics: false, marketing: false });
-    else if (action === 'save') decide(selection());
-  });
+  import '../../scripts/cookie-banner';
 </script>
