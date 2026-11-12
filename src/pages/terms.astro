@@ -1,0 +1,162 @@
+---
+import { site, whatsappUrl } from '../config/site';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// TODO: revisar el texto con el cliente (razón social, RUT, política de reprogramación y de devoluciones,
+// si los precios incluyen IVA y la vigencia de los cursos).
+const updated = '12 de noviembre de 2026';
+
+const linkClass = 'font-semibold text-brand underline underline-offset-2 hover:text-brand-dark';
+---
+
+<BaseLayout
+  title="Términos y condiciones"
+  description={`Condiciones de uso del sitio y de contratación de los cursos de ${site.name}.`}
+>
+  <section class="bg-ink">
+    <div class="mx-auto flex max-w-[820px] flex-col gap-8 px-6 pt-16 pb-24 text-[17px] text-soft">
+      <header class="flex flex-col gap-3">
+        <h1 class="m-0 font-display text-[clamp(36px,5vw,56px)] leading-none font-black tracking-[-0.02em] text-white uppercase">
+          Términos y condiciones
+        </h1>
+        <p class="m-0 text-sm text-muted">Última actualización: {updated}</p>
+      </header>
+
+      <p class="m-0">
+        Estos términos regulan el uso de este sitio y la contratación de los cursos y clases de {site.name}, con
+        domicilio en {site.address.street}, {site.address.city}, {site.address.region}, Chile. Al usar el sitio o
+        inscribirte en un curso, aceptas estas condiciones, sin perjuicio de los derechos que te otorga la Ley N° 19.496
+        sobre protección de los derechos de los consumidores.
+      </p>
+
+      <div class="flex flex-col gap-3">
+        <h2 class="m-0 font-display text-2xl font-extrabold text-white">Uso del sitio</h2>
+        <p class="m-0">
+          Este sitio es informativo: muestra nuestros cursos, requisitos, precios y canales de contacto. Te pedimos usarlo
+          de buena fe y entregar datos verdaderos en los formularios. Enviar un formulario es una solicitud de contacto y
+          no constituye por sí sola una inscripción ni una reserva de horario.
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-3">
+        <h2 class="m-0 font-display text-2xl font-extrabold text-white">Inscripción</h2>
+        <p class="m-0">
+          Tu inscripción queda confirmada cuando coordinamos contigo el curso y los horarios, presentas la documentación
+          requerida y realizas el pago acordado. Los requisitos y documentos de cada curso se detallan en su ficha y pueden
+          cambiar según lo disponga la normativa de tránsito vigente.
+        </p>
+        <p class="m-0">
+          Si tienes 17 años y te inscribes en el curso Clase B, necesitas la autorización notarial de tu madre, padre o
+          apoderado. Las licencias profesionales tienen requisitos de edad y antigüedad de licencia adicionales.
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-3">
+        <h2 class="m-0 font-display text-2xl font-extrabold text-white">Precios y pagos</h2>
+        <ul class="m-0 flex list-disc flex-col gap-2 pl-5 marker:text-brand">
+          <li>Los precios publicados están expresados en pesos chilenos e incluyen impuestos.</li>
+          <li>
+            Pueden cambiar sin previo aviso, pero siempre respetaremos el precio vigente al momento de tu inscripción.
+          </li>
+          <li>
+            Aceptamos efectivo, transferencia y tarjetas de débito y crédito. Las cuotas con tarjeta de crédito dependen de
+            las condiciones de tu banco emisor.
+          </li>
+          <li>Si encuentras un error evidente en un precio publicado, te informaremos el valor correcto antes de inscribirte.</li>
+        </ul>
+      </div>
+
+      <div class="flex flex-col gap-3">
+        <h2 class="m-0 font-display text-2xl font-extrabold text-white">Clases y reprogramación</h2>
+        <ul class="m-0 flex list-disc flex-col gap-2 pl-5 marker:text-brand">
+          <li>Las clases se realizan en los días y horarios coordinados contigo, según la disponibilidad de instructores y vehículos.</li>
+          <li>
+            Si no puedes asistir a una clase práctica, avísanos con al menos 24 horas de anticipación para reprogramarla.
+            Las inasistencias sin aviso podrán darse por realizadas.
+          </li>
+          <li>
+            Si por motivos de fuerza mayor, clima o seguridad debemos suspender una clase, la reprogramaremos sin costo.
+          </li>
+          <li>
+            Para las clases prácticas debes presentarte en condiciones de conducir: sin haber consumido alcohol, drogas ni
+            medicamentos que afecten tu capacidad. El instructor podrá suspender la clase si no se cumplen estas condiciones
+            o si hay riesgo para la seguridad.
+          </li>
+          <li>Durante las clases debes seguir en todo momento las indicaciones del instructor.</li>
+        </ul>
+      </div>
+
+      <div class="flex flex-col gap-3">
+        <h2 class="m-0 font-display text-2xl font-extrabold text-white">Retracto y devoluciones</h2>
+        <p class="m-0">
+          Si contratas un curso a distancia (por ejemplo, por WhatsApp con pago por transferencia), puedes retractarte
+          dentro de los 10 días siguientes a la contratación, siempre que no hayas comenzado las clases, conforme al
+          artículo 3 bis de la Ley N° 19.496. En ese caso te devolveremos lo pagado dentro de los plazos legales.
+        </p>
+        <p class="m-0">
+          Una vez iniciado el curso, las solicitudes de devolución se evaluarán caso a caso según las clases ya
+          realizadas. Lo anterior no limita tus derechos de garantía legal si el servicio no se presta en las condiciones
+          ofrecidas.
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-3">
+        <h2 class="m-0 font-display text-2xl font-extrabold text-white">Exámenes y licencia</h2>
+        <p class="m-0">
+          Te preparamos para rendir los exámenes teórico y práctico, pero la licencia de conducir la otorga la Dirección de
+          Tránsito de la municipalidad correspondiente. Los aranceles municipales, el examen psicotécnico y otros trámites
+          externos no están incluidos en el precio del curso, salvo que se indique lo contrario. Aprobar el examen
+          depende de tu desempeño, por lo que no podemos garantizar su resultado.
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-3">
+        <h2 class="m-0 font-display text-2xl font-extrabold text-white">Propiedad intelectual</h2>
+        <p class="m-0">
+          Los textos, imágenes, logotipos y diseño de este sitio pertenecen a {site.name} o se usan con autorización. No
+          puedes reproducirlos ni usarlos con fines comerciales sin nuestro permiso por escrito.
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-3">
+        <h2 class="m-0 font-display text-2xl font-extrabold text-white">Responsabilidad</h2>
+        <p class="m-0">
+          Procuramos que la información del sitio sea correcta y esté actualizada, pero puede contener errores u omisiones.
+          Ante cualquier duda, confirma los detalles con nosotros antes de inscribirte. No respondemos por el contenido de
+          sitios de terceros enlazados desde aquí, como redes sociales, WhatsApp o Google Maps.
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-3">
+        <h2 class="m-0 font-display text-2xl font-extrabold text-white">Datos personales</h2>
+        <p class="m-0">
+          El tratamiento de tus datos se rige por nuestra <a href="/privacy" class={linkClass}>política de privacidad</a>{' '}
+          y el uso de cookies por la <a href="/cookies" class={linkClass}>política de cookies</a>.
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-3">
+        <h2 class="m-0 font-display text-2xl font-extrabold text-white">Cambios a estos términos</h2>
+        <p class="m-0">
+          Podemos actualizar estos términos para reflejar cambios en nuestros servicios o en la ley. Publicaremos la nueva
+          versión en esta página con su fecha de actualización; los cambios no afectarán las inscripciones ya confirmadas.
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-3">
+        <h2 class="m-0 font-display text-2xl font-extrabold text-white">Ley aplicable y contacto</h2>
+        <p class="m-0">
+          Estos términos se rigen por las leyes de Chile. Si tienes un reclamo, te invitamos a escribirnos primero para
+          buscar una solución; siempre puedes recurrir al Servicio Nacional del Consumidor (SERNAC) o a los tribunales
+          competentes.
+        </p>
+        <p class="m-0">
+          Escríbenos por{' '}
+          <a href={whatsappUrl} target="_blank" rel="noopener" class={linkClass}>WhatsApp</a>, llámanos al{' '}
+          <a href={`tel:${site.phone.replaceAll(' ', '')}`} class={linkClass}>{site.phone}</a> o visítanos en{' '}
+          {site.address.street}, {site.address.city}.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
