@@ -1,5 +1,5 @@
 ---
-import { site } from '../../config/site';
+import { googleRatingLabel, site } from '../../config/site';
 import Button from '../ui/Button.astro';
 import PhotoPlaceholder from '../ui/PhotoPlaceholder.astro';
 ---
@@ -35,11 +35,13 @@ import PhotoPlaceholder from '../ui/PhotoPlaceholder.astro';
         <div
           class="flex size-11 shrink-0 items-center justify-center rounded-full bg-brand font-display text-base font-black text-ink"
         >
-          {site.googleRating}
+          {googleRatingLabel}
         </div>
         <div class="text-left leading-[1.35]">
           <div class="text-[15px] font-bold">Calificación en Google</div>
-          <div class="text-sm text-muted">Basado en reseñas de alumnos</div>
+          <div class="text-sm text-muted">
+            {site.google.reviewCount > 0 ? `${site.google.reviewCount} reseñas de alumnos` : 'Basado en reseñas de alumnos'}
+          </div>
         </div>
       </div>
     </PhotoPlaceholder>

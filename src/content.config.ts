@@ -32,9 +32,15 @@ const testimonials = defineCollection({
   schema: z.object({
     id: z.string(),
     name: z.string(),
-    course: z.string(),
+    course: z.string().optional(),
     source: z.string(),
     text: z.string(),
+    // Estrellas de la reseña original (1 a 5).
+    rating: z.number().int().min(1).max(5).default(5),
+    // Fecha de la reseña, formato "AAAA-MM-DD".
+    date: z.coerce.date().optional(),
+    // Link a la reseña en Google Maps (botón "Compartir" de la reseña).
+    url: z.url().optional(),
   }),
 });
 
