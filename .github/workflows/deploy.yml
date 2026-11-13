@@ -23,6 +23,8 @@ jobs:
         run: npm install
       - name: Build
         run: npm run build
+        env:
+          PUBLIC_WEB3FORMS_KEY: ${{ secrets.PUBLIC_WEB3FORMS_KEY }}
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
@@ -33,7 +35,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.output_url }}
+      url: ${{ steps.deployment.outputs.page_url }}
     permissions:
       pages: write
       id-token: write

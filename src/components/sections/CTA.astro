@@ -1,4 +1,5 @@
 ---
+import { withBase } from '../../utils/url';
 import Button from '../ui/Button.astro';
 ---
 
@@ -11,6 +12,6 @@ import Button from '../ui/Button.astro';
       </h2>
       <p class="m-0 text-[19px] font-semibold">Reserva tu clase hoy</p>
     </div>
-    <Button href="/registration" variant="dark" size="lg">Inscríbete ahora</Button>
+    <Button href={withBase('/registration')} variant="dark" size="lg">Inscríbete ahora</Button>
   </div>
 </section>

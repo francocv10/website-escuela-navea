@@ -1,8 +1,8 @@
 // Formularios [data-lead-form] (LeadForm.astro) enviados a Web3Forms.
 
-// Web3Forms necesita una URL absoluta para redirigir.
+// Web3Forms necesita una URL absoluta para redirigir (el value ya incluye el base).
 document.querySelectorAll<HTMLInputElement>('[data-lead-form] [data-redirect]').forEach((input) => {
-  input.value = new URL('/thank_you', location.origin).href;
+  input.value = new URL(input.value, location.origin).href;
 });
 
 // Feedback de envío: el botón confirma la acción y evita dobles envíos.

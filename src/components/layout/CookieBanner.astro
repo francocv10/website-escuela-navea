@@ -1,4 +1,5 @@
 ---
+import { withBase } from '../../utils/url';
 // Aviso de cookies + panel de preferencias. Sin JS no se muestra: en ese caso no se carga nada que requiera consentimiento.
 // Cualquier elemento con [data-cookie-settings] (p. ej. el enlace del footer) reabre el panel.
 import Button from '../ui/Button.astro';
@@ -35,7 +36,7 @@ const categories = [
   <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between md:gap-8">
     <p class="m-0 text-[15px] leading-relaxed text-soft">
       Usamos cookies propias y de terceros para que el sitio funcione y, si lo aceptas, para analizar su uso.{' '}
-      <a href="/cookies" class="font-semibold whitespace-nowrap text-white underline underline-offset-2 hover:text-brand">
+      <a href={withBase('/cookies')} class="font-semibold whitespace-nowrap text-white underline underline-offset-2 hover:text-brand">
         Más información
       </a>
     </p>
@@ -74,7 +75,7 @@ const categories = [
     </div>
     <p class="m-0 text-[15px] leading-relaxed text-soft">
       Elige qué cookies permites. Puedes cambiar tu elección cuando quieras desde el pie de página.{' '}
-      <a href="/cookies" class="font-semibold whitespace-nowrap text-white underline underline-offset-2 hover:text-brand">
+      <a href={withBase('/cookies')} class="font-semibold whitespace-nowrap text-white underline underline-offset-2 hover:text-brand">
         Política de cookies
       </a>
     </p>

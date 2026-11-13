@@ -1,19 +1,20 @@
 ---
+import { withBase } from '../../utils/url';
 import { Image } from 'astro:assets';
 import logo from '../../assets/logo-navea.png';
 import Button from '../ui/Button.astro';
 
 const links = [
-  { href: '/#cursos', label: 'Cursos' },
-  { href: '/#servicios', label: 'Servicios' },
-  { href: '/#nosotros', label: 'Nosotros' },
-  { href: '/#contacto', label: 'Contacto' },
+  { href: withBase('/#cursos'), label: 'Cursos' },
+  { href: withBase('/#servicios'), label: 'Servicios' },
+  { href: withBase('/#nosotros'), label: 'Nosotros' },
+  { href: withBase('/#contacto'), label: 'Contacto' },
 ];
 ---
 
 <header class="sticky top-0 z-50 border-b border-edge bg-ink/95 backdrop-blur-md">
   <div class="mx-auto flex max-w-[1240px] items-center justify-between gap-6 px-6 py-3.5">
-    <a href="/" class="flex items-center gap-3 text-white">
+    <a href={withBase('/')} class="flex items-center gap-3 text-white">
       <Image src={logo} alt="NAVEA Escuela de Conductores" width={56} height={56} class="block size-14 rounded-full" loading="eager" />
       <span class="font-display text-[22px] font-black tracking-[0.04em]">NAVEA</span>
     </a>
@@ -30,7 +31,7 @@ const links = [
           </a>
         ))
       }
-      <Button href="/registration">Inscríbete</Button>
+      <Button href={withBase('/registration')}>Inscríbete</Button>
     </nav>
 
     <button
@@ -62,7 +63,7 @@ const links = [
           </a>
         ))
       }
-      <Button href="/registration" size="lg" class="mt-4">Inscríbete</Button>
+      <Button href={withBase('/registration')} size="lg" class="mt-4">Inscríbete</Button>
     </div>
   </nav>
 </header>

@@ -1,4 +1,5 @@
 ---
+import { withBase } from '../utils/url';
 import { site } from '../config/site';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
@@ -106,7 +107,7 @@ const cookies = [
         <p class="m-0">
           Si tienes dudas sobre esta política, escríbenos o visítanos en {site.address.street}, {site.address.city}.
           Para saber cómo tratamos tus datos personales, revisa nuestra{' '}
-          <a href="/privacy" class="font-semibold text-brand underline underline-offset-2 hover:text-brand-dark">
+          <a href={withBase('/privacy')} class="font-semibold text-brand underline underline-offset-2 hover:text-brand-dark">
             política de privacidad</a
           >.
         </p>

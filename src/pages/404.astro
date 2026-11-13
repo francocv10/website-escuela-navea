@@ -1,4 +1,5 @@
 ---
+import { withBase } from '../utils/url';
 import Button from '../components/ui/Button.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
@@ -18,7 +19,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         Te desviaste del camino
       </h1>
       <p class="m-0 text-[19px] text-soft">La página que buscas no existe o cambió de dirección.</p>
-      <Button href="/" size="lg">Volver al inicio</Button>
+      <Button href={withBase('/')} size="lg">Volver al inicio</Button>
     </div>
   </section>
 </BaseLayout>
