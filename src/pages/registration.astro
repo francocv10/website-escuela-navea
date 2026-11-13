@@ -1,12 +1,12 @@
 ---
 import LeadForm from '../components/ui/LeadForm.astro';
-import { site, whatsappUrl } from '../config/site';
+import { phoneUrl, site, whatsappUrl } from '../config/site';
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout title="Inscripción" description="Inscríbete en tu curso de conducción en NAVEA. Déjanos tus datos y te contactamos para coordinar tu primera clase.">
   <section class="bg-ink">
-    <div class="mx-auto grid max-w-[1240px] gap-12 px-6 pt-16 pb-24 lg:grid-cols-[1fr_520px]">
+    <div class="mx-auto grid max-w-[1240px] grid-cols-[minmax(0,1fr)] gap-12 px-6 pt-16 pb-24 lg:grid-cols-[minmax(0,1fr)_520px]">
       <div class="flex flex-col gap-6">
         <h1 class="m-0 font-display text-[clamp(40px,5.6vw,72px)] leading-none font-black tracking-[-0.02em] text-balance uppercase">
           Reserva tu primera clase
@@ -15,7 +15,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           Completa tus datos y te contactamos dentro del día hábil para coordinar curso, horario y forma de pago.
         </p>
         <p class="m-0 text-[15px] text-muted">
-          ¿Prefieres hablar ahora? Escríbenos por <a href={whatsappUrl} class="font-bold text-brand hover:text-brand-dark">WhatsApp</a> o llama al {site.phone}.
+          ¿Prefieres hablar ahora? Escríbenos por <a href={whatsappUrl} class="font-bold text-brand hover:text-brand-dark">WhatsApp</a> o llama al <a href={phoneUrl} class="whitespace-nowrap text-soft underline underline-offset-2 hover:text-brand">{site.phone}</a>.
         </p>
       </div>
       <div class="rounded-2xl border border-edge bg-surface/40 p-7">

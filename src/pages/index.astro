@@ -12,24 +12,20 @@ import OtherServices from '../components/sections/OtherServices.astro';
 import Stats from '../components/sections/Stats.astro';
 import Testimonials from '../components/sections/Testimonials.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
-
-// Interruptores del diseño (props "showPrices" y "showStripes" del prototipo).
-const showPrices = true;
-const showStripes = true;
 ---
 
 <BaseLayout>
   <Hero />
-  {showStripes && <div class="stripes h-3.5" aria-hidden="true" />}
+  <div class="stripes h-3.5" aria-hidden="true"></div>
   <Stats />
-  <Courses showPrices={showPrices} />
-  <OtherServices showPrices={showPrices} />
+  <Courses />
+  <OtherServices />
   <Benefits />
   <HowItWorks />
   <Fleet />
   <Instructors />
   <Testimonials />
   <FAQ />
-  <CTA showStripes={showStripes} />
+  <CTA />
   <Contact />
 </BaseLayout>

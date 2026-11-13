@@ -1,19 +1,19 @@
 ---
 import SectionHeading from '../ui/SectionHeading.astro';
 
+// Solo diferenciales confirmados por el cliente (ver PRODUCT.md › Positioning).
 const benefits = [
-  { title: 'Instructores certificados', desc: 'Profesionales acreditados con años de experiencia enseñando a principiantes.' },
+  { title: 'Instructores pacientes', desc: 'Acompañan a quien llega nervioso o nunca ha manejado, sin apuro y a tu ritmo.' },
+  { title: 'Práctica en la ruta del examen', desc: 'Manejas el recorrido del examen municipal para que llegues sin sorpresas.' },
   { title: 'Autos con doble comando', desc: 'Practicas seguro desde la primera clase, con el instructor siempre en control.' },
-  { title: 'Horarios flexibles', desc: 'Clases de lunes a sábado, en la mañana, tarde o después del trabajo.' },
-  { title: 'Examen teórico', desc: 'Simulador con preguntas reales del cuestionario oficial de Conaset.' },
-  { title: 'Examen práctico', desc: 'Practicamos en la ruta del examen municipal para que llegues sin sorpresas.' },
+  { title: 'Simulador de examen teórico', desc: 'Preguntas reales del cuestionario oficial de Conaset.' },
 ];
 ---
 
 <section id="nosotros" class="bg-ink">
   <div class="mx-auto flex max-w-[1240px] flex-col gap-12 px-6 py-24">
     <SectionHeading title="Aprendes tranquilo, llegas preparado" />
-    <ul class="m-0 grid list-none gap-x-8 gap-y-10 p-0 sm:grid-cols-2 lg:grid-cols-5">
+    <ul class="m-0 grid list-none gap-x-8 gap-y-10 p-0 sm:grid-cols-2 lg:grid-cols-4">
       {
         benefits.map((b) => (
           <li class="relative flex flex-col gap-2.5 border-t border-edge-2 pt-6">
