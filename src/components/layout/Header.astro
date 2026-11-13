@@ -39,7 +39,7 @@ const links = [
       aria-label="Abrir menú"
       aria-expanded="false"
       aria-controls="mobile-menu"
-      class="group flex size-12 cursor-pointer flex-col items-center justify-center gap-[5px] rounded-xl border border-[#333] bg-surface transition-[border-color,scale] hover:border-[#4a4a4a] active:scale-95 active:duration-100 nav:hidden"
+      class="group flex size-12 cursor-pointer flex-col items-center justify-center gap-[5px] rounded-xl border border-edge-strong bg-surface transition-[border-color,scale] hover:border-edge-hover active:scale-95 active:duration-100 nav:hidden"
     >
       <!-- Las tres barras se cruzan en una X al abrir. -->
       <span class="block h-0.5 w-5 bg-brand transition-[translate,rotate] duration-300 group-aria-expanded:translate-y-[7px] group-aria-expanded:rotate-45"></span>
@@ -57,7 +57,7 @@ const links = [
     <div class="flex flex-col gap-1">
       {
         links.map((link) => (
-          <a href={link.href} class="border-b border-[#1f1f1f] py-3 font-display text-xl font-bold text-white transition-colors hover:text-brand">
+          <a href={link.href} class="border-b border-edge py-3 font-display text-xl font-bold text-white transition-colors hover:text-brand">
             {link.label}
           </a>
         ))

@@ -31,7 +31,10 @@ export const site = {
     'https://maps.google.com/maps?q=Calle%20Irarr%C3%A1saval%20656%2C%20Quilpu%C3%A9%2C%20Valpara%C3%ADso%2C%20Chile&z=16&output=embed',
 } as const;
 
-export const whatsappUrl = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(site.whatsappMessage)}`;
+// "+56 9 6857 2157" → "tel:+56968572157"
+export const phoneUrl = `tel:${site.phone.replace(/\s+/g, '')}`;
+
+export const whatsappUrl =`https://wa.me/${site.whatsapp}?text=${encodeURIComponent(site.whatsappMessage)}`;
 
 // Links a la ficha de Google: ver reseñas y dejar una. Son null mientras no haya Place ID.
 const { placeId } = site.google as { placeId: string };

@@ -1,11 +1,11 @@
 ---
-import { site } from '../../config/site';
+import { phoneUrl, site } from '../../config/site';
 import LeadForm from '../ui/LeadForm.astro';
 import SectionHeading from '../ui/SectionHeading.astro';
 
 const details = [
   { label: 'Dirección', lines: [`${site.address.street}, ${site.address.city}, ${site.address.region}`] },
-  { label: 'Teléfono', lines: [site.phone] },
+  { label: 'Teléfono', lines: [site.phone], href: phoneUrl },
   { label: 'Horario', lines: site.hours },
 ];
 ---
@@ -30,12 +30,18 @@ const details = [
             <div>
               <dt class="text-[13px] font-bold tracking-[0.08em] text-muted uppercase">{d.label}</dt>
               <dd class="m-0">
-                {d.lines.map((line, i) => (
-                  <>
-                    {i > 0 && <br />}
-                    {line}
-                  </>
-                ))}
+                {d.href ? (
+                  <a href={d.href} class="underline decoration-edge-hover underline-offset-4 transition-colors hover:text-brand hover:decoration-brand">
+                    {d.lines[0]}
+                  </a>
+                ) : (
+                  d.lines.map((line, i) => (
+                    <>
+                      {i > 0 && <br />}
+                      {line}
+                    </>
+                  ))
+                )}
               </dd>
             </div>
           ))

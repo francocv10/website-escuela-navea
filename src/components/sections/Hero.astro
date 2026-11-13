@@ -15,15 +15,15 @@ import PhotoPlaceholder from '../ui/PhotoPlaceholder.astro';
         Aprende a conducir con <span class="text-brand">confianza</span>
       </h1>
       <p class="m-0 max-w-[520px] text-[19px] text-pretty text-soft">
-        Tu licencia, sin estrés. Instructores certificados, autos con doble comando y horarios que se adaptan a ti.
+        Tu licencia, sin estrés. Instructores pacientes y práctica en la misma ruta del examen municipal.
       </p>
       <div class="grid gap-3 min-[430px]:flex min-[430px]:flex-wrap min-[430px]:gap-3.5">
         <Button href="#contacto" size="lg">Reserva tu clase</Button>
         <Button href="#cursos" size="lg" variant="outline">Ver cursos</Button>
       </div>
-      <p class="m-0 flex flex-wrap gap-x-2 text-[15px] text-muted">
+      <p class="m-0 flex flex-col gap-x-2 text-[15px] text-muted sm:flex-row sm:flex-wrap">
         <span>Clase B y licencias profesionales</span>
-        <span aria-hidden="true">·</span>
+        <span class="hidden sm:inline" aria-hidden="true">·</span>
         <span class="whitespace-nowrap">{site.address.street}, {site.address.city}</span>
       </p>
     </div>

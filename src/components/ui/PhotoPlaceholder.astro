@@ -14,7 +14,7 @@ const { label, tone = 'dark', class: className } = Astro.props;
   aria-label={label}
   class:list={[
     'flex items-center justify-center rounded-2xl px-6 text-center font-mono text-[13px]',
-    tone === 'dark' ? 'photo-placeholder-dark border border-edge-2 text-[#8a8a8a]' : 'photo-placeholder-light text-[#555]',
+    tone === 'dark' ? 'photo-placeholder-dark border border-edge-2 text-muted' : 'photo-placeholder-light text-text-on-light',
     className,
   ]}
 >

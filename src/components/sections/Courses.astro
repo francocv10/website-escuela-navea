@@ -6,11 +6,6 @@ import Button from '../ui/Button.astro';
 import Card from '../ui/Card.astro';
 import SectionHeading from '../ui/SectionHeading.astro';
 
-interface Props {
-  showPrices?: boolean;
-}
-
-const { showPrices = true } = Astro.props;
 const courses = (await getCollection('courses')).sort((a, b) => a.data.order - b.data.order);
 ---
 
@@ -18,7 +13,7 @@ const courses = (await getCollection('courses')).sort((a, b) => a.data.order - b
   <div class="mx-auto flex max-w-[1240px] flex-col gap-12 px-6 py-24">
     <div class="flex flex-wrap items-end justify-between gap-6">
       <SectionHeading title="Elige la licencia que necesitas" />
-      <p class="m-0 max-w-[380px] text-pretty text-[#555]">
+      <p class="m-0 max-w-[380px] text-pretty text-text-on-light">
         Todos los cursos incluyen clases teóricas, prácticas y preparación para el examen municipal.
       </p>
     </div>
@@ -35,19 +30,17 @@ const courses = (await getCollection('courses')).sort((a, b) => a.data.order - b
             </div>
             <div class="flex flex-col gap-1.5">
               <h3 class="m-0 font-display text-[22px] leading-[1.2] font-extrabold">{data.name}</h3>
-              <p class="m-0 text-[15px] text-pretty text-[#555]">{data.description}</p>
+              <p class="m-0 text-[15px] text-pretty text-text-on-light">{data.description}</p>
             </div>
-            <dl class="m-0 mt-auto flex flex-col gap-2 border-t border-[#eee] pt-4 text-[15px]">
+            <dl class="m-0 mt-auto flex flex-col gap-2 border-t border-edge-light pt-4 text-[15px]">
               <div class="flex justify-between">
-                <dt class="text-[#6b6b6b]">Duración</dt>
+                <dt class="text-muted-on-light">Duración</dt>
                 <dd class="m-0 font-bold">{data.duration}</dd>
               </div>
-              {showPrices && (
-                <div class="flex items-baseline justify-between">
-                  <dt class="text-[#6b6b6b]">Desde</dt>
-                  <dd class="m-0 font-display text-[22px] font-black tabular-nums">{formatCLP(data.price)}</dd>
-                </div>
-              )}
+              <div class="flex items-baseline justify-between">
+                <dt class="text-muted-on-light">Desde</dt>
+                <dd class="m-0 font-display text-[22px] font-black tabular-nums">{formatCLP(data.price)}</dd>
+              </div>
             </dl>
             {/* Al pasar sobre la tarjeta, su acción se enciende: toda la tarjeta apunta a "Ver curso". */}
             <Button href={`/cursos/${id}`} variant="dark" class="group-hover:bg-brand group-hover:text-ink">

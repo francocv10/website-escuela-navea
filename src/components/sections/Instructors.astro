@@ -2,12 +2,12 @@
 import PhotoPlaceholder from '../ui/PhotoPlaceholder.astro';
 import SectionHeading from '../ui/SectionHeading.astro';
 
-// TODO: nombres y fotos reales de los instructores.
-const instructors = [
-  { name: 'Nombre Apellido', role: '18 años de experiencia' },
-  { name: 'Nombre Apellido', role: '12 años de experiencia' },
-  { name: 'Nombre Apellido', role: '9 años de experiencia' },
-  { name: 'Nombre Apellido', role: '6 años de experiencia' },
+// TODO: nombres y fotos reales de los instructores. Agregar `role` solo con datos confirmados.
+const instructors: { name: string; role?: string }[] = [
+  { name: 'Nombre Apellido' },
+  { name: 'Nombre Apellido' },
+  { name: 'Nombre Apellido' },
+  { name: 'Nombre Apellido' },
 ];
 ---
 
@@ -21,7 +21,7 @@ const instructors = [
             <PhotoPlaceholder label="foto instructor" tone="light" class="aspect-square" />
             <div class="flex flex-col gap-0.5">
               <p class="m-0 font-display text-xl font-extrabold">{person.name}</p>
-              <p class="m-0 text-[15px]">{person.role}</p>
+              {person.role && <p class="m-0 text-[15px]">{person.role}</p>}
             </div>
           </li>
         ))
