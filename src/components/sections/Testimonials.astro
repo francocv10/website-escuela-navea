@@ -1,31 +1,62 @@
 ---
 import { getCollection } from 'astro:content';
-import { site } from '../../config/site';
+import { googleRatingLabel, googleReviewsUrl, googleWriteReviewUrl, site } from '../../config/site';
+import Button from '../ui/Button.astro';
 import Card from '../ui/Card.astro';
 import SectionHeading from '../ui/SectionHeading.astro';
 
+// Reseñas reales copiadas desde la ficha de Google (ver src/content/testimonials.json).
 const testimonials = await getCollection('testimonials');
+
+const formatDate = (date: Date) =>
+  new Intl.DateTimeFormat('es-CL', { month: 'long', year: 'numeric', timeZone: 'UTC' }).format(date);
 ---
 
 <section class="bg-ink">
   <div class="mx-auto flex max-w-[1240px] flex-col gap-10 px-6 py-24">
     <div class="flex flex-wrap items-end justify-between gap-5">
-      <SectionHeading title="Lo que dicen nuestros alumnos" />
-      <a
-        href={site.googleReviewsUrl}
-        class="border-b-2 border-brand pb-0.5 text-[15px] font-bold text-brand transition-colors hover:text-brand-dark"
-      >
-        Ver reseñas en Google
-      </a>
+      <div class="flex flex-col gap-3">
+        <SectionHeading title="Lo que dicen nuestros alumnos" />
+        <p class="m-0 text-[15px] text-muted">
+          <strong class="font-bold text-white">{googleRatingLabel} de 5</strong> en Google
+          {site.google.reviewCount > 0 && <> · {site.google.reviewCount} reseñas</>}
+        </p>
+      </div>
+      {
+        (googleReviewsUrl || googleWriteReviewUrl) && (
+          <div class="flex flex-wrap items-center gap-5">
+            {googleReviewsUrl && (
+              <a
+                href={googleReviewsUrl}
+                target="_blank"
+                rel="noopener"
+                class="border-b-2 border-brand pb-0.5 text-[15px] font-bold text-brand transition-colors hover:text-brand-dark"
+              >
+                Ver reseñas en Google
+              </a>
+            )}
+            {googleWriteReviewUrl && (
+              <Button href={googleWriteReviewUrl} target="_blank" rel="noopener" variant="outline" size="sm">
+                Déjanos tu reseña
+              </Button>
+            )}
+          </div>
+        )
+      }
     </div>
 
     <ul class="m-0 grid list-none grid-cols-[repeat(auto-fit,minmax(min(100%,320px),1fr))] gap-5 p-0">
       {
         testimonials.map(({ data }) => (
           <Card as="li" class="gap-[18px]">
-            <div class="flex gap-1 text-brand" role="img" aria-label="5 de 5 estrellas">
-              {Array.from({ length: 5 }, () => (
-                <svg viewBox="0 0 20 20" class="size-[18px]" fill="currentColor" aria-hidden="true">
+            <div class="flex gap-1" role="img" aria-label={`${data.rating} de 5 estrellas`}>
+              {Array.from({ length: 5 }, (_, i) => (
+                <svg
+                  viewBox="0 0 20 20"
+                  class:list={['size-[18px]', i < data.rating ? 'text-brand' : 'text-edge']}
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
                   <path d="M10 1.5l2.6 5.3 5.9.9-4.25 4.1 1 5.85L10 14.9l-5.25 2.75 1-5.85L1.5 7.7l5.9-.9z" />
                 </svg>
               ))}
@@ -41,7 +72,15 @@ const testimonials = await getCollection('testimonials');
               <div class="leading-[1.35]">
                 <p class="m-0 text-[15px] font-bold">{data.name}</p>
                 <p class="m-0 text-sm text-muted">
-                  {data.course} · {data.source}
+                  {data.course} ·{' '}
+                  {data.url ? (
+                    <a href={data.url} target="_blank" rel="noopener" class="underline transition-colors hover:text-brand">
+                      {data.source}
+                    </a>
+                  ) : (
+                    data.source
+                  )}
+                  {data.date && <> · {formatDate(data.date)}</>}
                 </p>
               </div>
             </div>
