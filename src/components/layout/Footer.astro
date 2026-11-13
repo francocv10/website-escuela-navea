@@ -1,4 +1,5 @@
 ---
+import { withBase } from '../../utils/url';
 import { Image } from 'astro:assets';
 import logo from '../../assets/logo-navea.png';
 import { site } from '../../config/site';
@@ -7,10 +8,10 @@ const columns = [
   {
     title: 'Navegación',
     links: [
-      { href: '/#cursos', label: 'Cursos' },
-      { href: '/us', label: 'Nosotros' },
-      { href: '/registration', label: 'Inscripción' },
-      { href: '/#contacto', label: 'Contacto' },
+      { href: withBase('/#cursos'), label: 'Cursos' },
+      { href: withBase('/us'), label: 'Nosotros' },
+      { href: withBase('/registration'), label: 'Inscripción' },
+      { href: withBase('/#contacto'), label: 'Contacto' },
     ],
   },
   {
@@ -23,9 +24,9 @@ const columns = [
   {
     title: 'Legal',
     links: [
-      { href: '/terms', label: 'Términos y condiciones' },
-      { href: '/privacy', label: 'Política de privacidad' },
-      { href: '/cookies', label: 'Política de cookies' },
+      { href: withBase('/terms'), label: 'Términos y condiciones' },
+      { href: withBase('/privacy'), label: 'Política de privacidad' },
+      { href: withBase('/cookies'), label: 'Política de cookies' },
     ],
   },
 ];

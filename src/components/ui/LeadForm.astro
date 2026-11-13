@@ -1,4 +1,5 @@
 ---
+import { withBase } from '../../utils/url';
 // Formulario de contacto/inscripción enviado a Web3Forms.
 // Tras el envío, Web3Forms redirige a /thank_you (sirve para medir conversiones).
 import { getCollection } from 'astro:content';
@@ -32,7 +33,7 @@ const fieldClass =
   <input type="hidden" name="access_key" value={accessKey} />
   <input type="hidden" name="subject" value={subject} />
   <input type="hidden" name="from_name" value="Sitio web NAVEA" />
-  <input type="hidden" name="redirect" value="/thank_you" data-redirect />
+  <input type="hidden" name="redirect" value={withBase('/thank_you')} data-redirect />
   <!-- Honeypot anti-spam de Web3Forms -->
   <input type="checkbox" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" />
 
@@ -108,9 +109,9 @@ const fieldClass =
 
   <p class="m-0 text-[13px] text-muted">
     Al enviar, aceptas los{' '}
-    <a href="/terms" class="text-soft underline underline-offset-2 hover:text-brand">términos y condiciones</a> y que te
+    <a href={withBase('/terms')} class="text-soft underline underline-offset-2 hover:text-brand">términos y condiciones</a> y que te
     contactemos según nuestra{' '}
-    <a href="/privacy" class="text-soft underline underline-offset-2 hover:text-brand">política de privacidad</a>.
+    <a href={withBase('/privacy')} class="text-soft underline underline-offset-2 hover:text-brand">política de privacidad</a>.
   </p>
 </form>
 
