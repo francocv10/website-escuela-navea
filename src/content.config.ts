@@ -32,7 +32,7 @@ const testimonials = defineCollection({
   schema: z.object({
     id: z.string(),
     name: z.string(),
-    course: z.string(),
+    course: z.string().optional(),
     source: z.string(),
     text: z.string(),
     // Estrellas de la reseña original (1 a 5).

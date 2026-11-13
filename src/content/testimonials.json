@@ -1,5 +1,51 @@
 [
-  { "id": "camila-r", "name": "Camila R.", "course": "Clase B", "source": "Reseña en Google", "text": "Llegué sin saber nada y con mucho miedo. El instructor tuvo una paciencia increíble y aprobé a la primera." },
-  { "id": "matias-f", "name": "Matías F.", "course": "Clase B", "source": "Reseña en Google", "text": "Los horarios se adaptaron a mi trabajo y practicar en la ruta del examen me dio mucha seguridad." },
-  { "id": "jorge-p", "name": "Jorge P.", "course": "Clase A2", "source": "Reseña en Google", "text": "Muy profesionales. Saqué mi licencia profesional y ya estoy trabajando." }
+  {
+    "id": "ari-c",
+    "name": "Ari C.",
+    "source": "Reseña en Google",
+    "rating": 5,
+    "text": "Quiero agradecer a la Escuela de Conductores Navea por su paciencia, compromiso y flexibilidad durante todo el curso.\n\nAlgo que destaco muchísimo es que cuentan con clases teóricas presenciales, algo que en otras escuelas suele ser bastante escaso y que considero fundamental para aprender y prepararse de la mejor manera. Además, las clases prácticas son muy flexibles, ya que existe la posibilidad de reprogramarlas según la disponibilidad de tiempo de cada alumno, lo que facilita mucho el proceso.\n\nUn agradecimiento especial al profe Marcelo, por su dedicación, paciencia y apoyo en cada etapa del aprendizaje, por la disposición para enseñar y la confianza que transmite durante todo el proceso. Sin duda, su compromiso hace una gran diferencia para quienes estamos aprendiendo.\n\nTambién quiero destacar la amabilidad de su secretaria, quien siempre brinda una excelente atención y responde con muy buena disposición. 🥰\n\nMe voy muy agradecida por la experiencia y por todo lo aprendido. Sin duda, elegir la Escuela de Conductores Navea fue la mejor decisión. La recomiendo totalmente por su calidad humana, profesionalismo y preocupación por sus alumnos. ¡Muchas gracias por todo! 🥹❤️🚘"
+  },
+  {
+    "id": "constanza-p",
+    "name": "Constanza P.",
+    "source": "Reseña en Google",
+    "rating": 5,
+    "text": "Recomiendo totalmente esta escuela de manejo. Las clases teóricas son muy precisas y se alinean exactamente con lo que preguntan en el examen, lo que da mucha seguridad. Por otro lado, destaco las clases prácticas con el profesor José; es un excelente instructor, tiene muchísima paciencia y te motiva constantemente a aprender de forma correcta y con confianza. Gracias a toda esta preparación, logré aprobar ambos exámenes a la primera :)"
+  },
+  {
+    "id": "karina-b",
+    "name": "Karina B.",
+    "source": "Reseña en Google",
+    "rating": 5,
+    "text": "Recomiendo totalmente a Escuela Navea!! Fue una grata experiencia. La secretaria Srta Carmen Gloria, siempre muy amable, gentil y preocupada. Por otro lado, el Profesor Marcelo, quién fue mi instructor, es excelente! Te enseña con mucha paciencia, dedicación y te entrega la seguridad que necesitas para aprender a conducir. Me sentí muy cómoda en todas las prácticas.\nCabe destacar que cuentan con clases teóricas presenciales, lo cual es un gran plus a diferencia de otras escuelas.\nAprobé mi exámen teórico y práctico en la primera instancia. Finalizo muy contenta mi curso de conducción.\n¡Muchas gracias! 🫂💕"
+  },
+  {
+    "id": "kathalina-m",
+    "name": "Kathalina M.",
+    "source": "Reseña en Google",
+    "rating": 5,
+    "text": "Aprobé los exámenes a la primera y obtuve mi licencia luego de postergarla por años. Recomiendo esta escuela porque tiene clases teóricas presenciales, lo cual ayuda mucho a despejar dudas sobre el examen teórico. Tuve clases prácticas con el profesor Marcelo y agradezco su paciencia y enseñanza pesar de que en un comienzo me pareció serio. Pregunten todo lo que quieran pero confíen en lo que les dice el profe, siempre los aconsejará en pos de que obtengan su licencia. En mi caso por mi trabajo tenía disponibilidad de horarios para las clases prácticas super acotados pero aún así supieron coordinarlas bien lo cual se agradece."
+  },
+  {
+    "id": "maria-ines-k",
+    "name": "María Inés K.",
+    "source": "Reseña en Google",
+    "rating": 5,
+    "text": "Excelente experiencia y atención. Quiero destacar especialmente la atención de la Srta. Carmen Gloria, quien se encarga de coordinar las horas prácticas y además tiene el detalle de recordar el día anterior que debes asistir, lo que se agradece muchísimo.\n\nEn mi caso, tuve como profesor a José Silva, quien fue muy paciente, amable y siempre dispuesto a explicar y enseñar con tranquilidad. Me sentí muy acompañada durante el proceso.\n\n¡Muchas gracias a ambos por la excelente atención y disposición! Totalmente recomendable."
+  },
+  {
+    "id": "maria-alexandra-o",
+    "name": "María Alexandra O.",
+    "source": "Reseña en Google",
+    "rating": 5,
+    "text": "Muy agradecida de escuela Navea pero, sobretodo del personal a cargo; Carmen Gloria, Marcelo y el profesor Jose que han tenido dedicación, paciencia y amabilidad en enseñar y guiarme durante todo el proceso.\nMis practicas las hice con el profesor Jose y destaco su dedicación y cercanía, ha sido una experiencia muy bonita compartir con él.\nSin duda los recomiendo! finalizo este proceso muy contenta ☺️"
+  },
+  {
+    "id": "romina-v",
+    "name": "Romina V.",
+    "source": "Reseña en Google",
+    "rating": 5,
+    "text": "RECOMENDADISIMA!!\nExcelente escuela, la secretaria y los instructores todos con muy buena disposición. Vengo de otra escuela de manejo de quilpue(muy conocida) y puros problemas,definitivamente , me quedo con escuela navea ya que aprendí muy bien y aprobé todo a la primera.\n\nArrepentida de no haberme inscrito acá de un principio, pero bueno si andan buscando una escuela, quedense con esta en serio."
+  }
 ]

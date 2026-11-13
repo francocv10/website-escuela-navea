@@ -45,10 +45,11 @@ const formatDate = (date: Date) =>
       }
     </div>
 
-    <ul class="m-0 grid list-none grid-cols-[repeat(auto-fit,minmax(min(100%,320px),1fr))] gap-5 p-0">
+    <!-- Mosaico en columnas: las reseñas tienen largos muy distintos y así no quedan huecos. -->
+    <ul class="m-0 list-none gap-5 p-0 md:columns-2 lg:columns-3">
       {
         testimonials.map(({ data }) => (
-          <Card as="li" class="gap-[18px]">
+          <Card as="li" class="mb-5 break-inside-avoid gap-[18px]">
             <div class="flex gap-1" role="img" aria-label={`${data.rating} de 5 estrellas`}>
               {Array.from({ length: 5 }, (_, i) => (
                 <svg
@@ -61,8 +62,16 @@ const formatDate = (date: Date) =>
                 </svg>
               ))}
             </div>
-            <blockquote class="m-0 text-[17px] leading-[1.55] text-pretty">“{data.text}”</blockquote>
-            <div class="mt-auto flex items-center gap-3">
+            <blockquote class="m-0 flex flex-col gap-3 text-[17px] leading-[1.55] text-pretty">
+              {data.text
+                .split(/\n+/)
+                .map((paragraph) => paragraph.trim())
+                .filter(Boolean)
+                .map((paragraph) => (
+                  <p class="m-0">{paragraph}</p>
+                ))}
+            </blockquote>
+            <div class="flex items-center gap-3">
               <div
                 class="flex size-10 items-center justify-center rounded-full bg-edge font-display font-extrabold text-brand"
                 aria-hidden="true"
@@ -72,7 +81,7 @@ const formatDate = (date: Date) =>
               <div class="leading-[1.35]">
                 <p class="m-0 text-[15px] font-bold">{data.name}</p>
                 <p class="m-0 text-sm text-muted">
-                  {data.course} ·{' '}
+                  {data.course && <>{data.course} · </>}
                   {data.url ? (
                     <a href={data.url} target="_blank" rel="noopener" class="underline transition-colors hover:text-brand">
                       {data.source}
